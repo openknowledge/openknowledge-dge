@@ -45,21 +45,21 @@
     <property name="message" value="Illegal use of [exception].printStackTrace() - use a logger instead!"/>
   </module>
 
-  <module name="RegexpSingleline">
-    <!-- . matches any character, so we need to
-      escape it and use \. to match dots. -->
-    <property name="id" value="newDate"/>
-    <property name="format" value="new Date\(\)"/>
-    <property name="message" value="Illegal use of new Date(). - use NsfDate instead!"/>
-  </module>
+  <!--<module name="RegexpSingleline">-->
+    <!--&lt;!&ndash; . matches any character, so we need to-->
+      <!--escape it and use \. to match dots. &ndash;&gt;-->
+    <!--<property name="id" value="newDate"/>-->
+    <!--<property name="format" value="new Date\(\)"/>-->
+    <!--<property name="message" value="Illegal use of new Date(). - use NsfDate instead!"/>-->
+  <!--</module>-->
 
-  <module name="RegexpSingleline">
-    <!-- . matches any character, so we need to
-      escape it and use \. to match dots. -->
-    <property name="id" value="calenderInstance"/>
-    <property name="format" value="Calendar\.getInstance\(\)"/>
-    <property name="message" value="Illegal use of Calender.getInstance(). - use NsfDate instead!"/>
-  </module>
+  <!--<module name="RegexpSingleline">-->
+    <!--&lt;!&ndash; . matches any character, so we need to-->
+      <!--escape it and use \. to match dots. &ndash;&gt;-->
+    <!--<property name="id" value="calenderInstance"/>-->
+    <!--<property name="format" value="Calendar\.getInstance\(\)"/>-->
+    <!--<property name="message" value="Illegal use of Calender.getInstance(). - use NsfDate instead!"/>-->
+  <!--</module>-->
 
   <module name="RegexpHeader">
     <property name="id" value="disclaimer"/>
