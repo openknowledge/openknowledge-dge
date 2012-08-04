@@ -1,0 +1,178 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+        "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+        "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+
+<module name="Checker">
+
+  <metadata name="de.openknowledge" value="OK checkstyle"/>
+
+  <property name="severity" value="error"/>
+
+
+  <module name="SeverityMatchFilter">
+    <property name="severity" value="info"/>
+    <property name="acceptOnMatch" value="false"/>
+  </module>
+
+  <module name="FileLength">
+    <property name="max" value="2000"/>
+  </module>
+
+  <module name="FileTabCharacter"/>
+
+  <module name="RegexpSingleline">
+    <!-- . matches any character, so we need to
+      escape it and use \. to match dots. -->
+    <property name="id" value="sysout"/>
+    <property name="format" value="System\.out\."/>
+    <property name="message" value="Illegal use of System.out. - use a logger instead!"/>
+  </module>
+
+  <module name="RegexpSingleline">
+    <!-- . matches any character, so we need to
+      escape it and use \. to match dots. -->
+    <property name="id" value="syserr"/>
+    <property name="format" value="System\.err\."/>
+    <property name="message" value="Illegal use of System.err. - use a logger instead!"/>
+  </module>
+
+  <module name="RegexpSingleline">
+    <!-- . matches any character, so we need to
+      escape it and use \. to match dots. -->
+    <property name="id" value="stacktrace"/>
+    <property name="format" value="\.printStackTrace\(\)"/>
+    <property name="message" value="Illegal use of [exception].printStackTrace() - use a logger instead!"/>
+  </module>
+
+  <module name="RegexpSingleline">
+    <!-- . matches any character, so we need to
+      escape it and use \. to match dots. -->
+    <property name="id" value="newDate"/>
+    <property name="format" value="new Date\(\)"/>
+    <property name="message" value="Illegal use of new Date(). - use NsfDate instead!"/>
+  </module>
+
+  <module name="RegexpSingleline">
+    <!-- . matches any character, so we need to
+      escape it and use \. to match dots. -->
+    <property name="id" value="calenderInstance"/>
+    <property name="format" value="Calendar\.getInstance\(\)"/>
+    <property name="message" value="Illegal use of Calender.getInstance(). - use NsfDate instead!"/>
+  </module>
+
+  <module name="RegexpHeader">
+    <property name="id" value="disclaimer"/>
+    <property name="headerFile" value="${checkstyle.header.file}"/>
+  </module>
+
+  <module name="TreeWalker">
+
+    <property name="tabWidth" value="2"/>
+
+    <module name="FileContentsHolder"/>
+
+    <module name="EmptyBlock">
+      <property name="option" value="text"/>
+      <property name="tokens" value="LITERAL_CATCH"/>
+    </module>
+    <module name="EmptyBlock">
+      <property name="tokens"
+                value="LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_IF,LITERAL_FOR,LITERAL_TRY,LITERAL_WHILE,INSTANCE_INIT,STATIC_INIT"/>
+    </module>
+    <module name="EmptyStatement"/>
+
+
+    <!-- checks regarding padding -->
+    <module name="EmptyForIteratorPad"/>
+    <module name="ParenPad"/>
+    <module name="TypecastParenPad"/>
+    <!--
+      <module name="WhitespaceAround">
+    -->
+    <!-- excluded COLON, QUESTION, GENERIC_START, GENERIC_END, WILDCARD_TYPE, PLUS, MINUS -->
+    <!--
+      <property name="tokens" value="ASSIGN, BAND, BAND_ASSIGN, BOR, BOR_ASSIGN, BSR, BSR_ASSIGN, BXOR, BXOR_ASSIGN, DIV, DIV_ASSIGN, EQUAL, GE, GT, LAND, LCURLY, LE, LITERAL_ASSERT, LITERAL_CATCH, LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_FOR, LITERAL_IF, LITERAL_RETURN, LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_WHILE, LOR, LT, MINUS_ASSIGN, MOD, MOD_ASSIGN, NOT_EQUAL, PLUS_ASSIGN, RCURLY, SL, SLIST, SL_ASSIGN, SR, SR_ASSIGN, STAR, STAR_ASSIGN, TYPE_EXTENSION_AND"/>
+      </module>
+    -->
+
+    <!-- checks regarding imports -->
+    <module name="IllegalImport"/>
+    <module name="AvoidStarImport"/>
+    <module name="UnusedImports"/>
+    <module name="RedundantImport"/>
+
+    <!-- checks regarding bracing -->
+    <module name="NeedBraces"/>
+    <module name="LeftCurly"/>
+    <module name="RightCurly">
+      <property name="option" value="same"/>
+    </module>
+
+    <!-- checks regarding naming -->
+    <module name="LocalFinalVariableName"/>
+    <module name="LocalVariableName"/>
+    <module name="MemberName"/>
+    <module name="PackageName">
+      <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
+    </module>
+    <module name="MethodName"/>
+    <module name="ParameterName">
+      <property name="format" value="^[a-z]+[a-zA-Z0-9]*$"/>
+    </module>
+    <module name="StaticVariableName"/>
+    <module name="ConstantName"/>
+    <module name="TypeName"/>
+
+    <!-- checks regarind the length of anything -->
+    <module name="LineLength">
+      <property name="ignorePattern" value="^ *\*"/>
+      <property name="max" value="140"/>
+    </module>
+    <module name="MethodLength">
+      <property name="id" value="methodlength"/>
+      <property name="countEmpty" value="false"/>
+      <property name="max" value="100"/>
+    </module>
+
+    <module name="MethodParamPad"/>
+    <module name="ModifierOrder"/>
+
+    <module name="ParameterNumber">
+      <property name="max" value="10"/>
+    </module>
+    <module name="VisibilityModifier">
+      <property name="packageAllowed" value="true"/>
+      <property name="protectedAllowed" value="true"/>
+    </module>
+    <!--<module name="HiddenField"/>-->
+    <!-- module name="FinalLocalVariable"/ -->
+
+    <!-- best practices -->
+    <module name="SimplifyBooleanExpression"/>
+    <module name="SimplifyBooleanReturn"/>
+    <module name="FinalClass"/>
+    <module name="MissingSwitchDefault"/>
+    <module name="EqualsHashCode"/>
+    <module name="UpperEll"/>
+    <module name="IllegalInstantiation"/>
+    <module name="IllegalThrows"/>
+    <module name="InnerAssignment"/>
+    <!-- Generates quite a few errors -->
+    <module name="CyclomaticComplexity">
+      <property name="severity" value="ignore"/>
+    </module>
+
+    <module name="NestedIfDepth">
+      <property name="max" value="4"/>
+    </module>
+    <module name="NestedTryDepth">
+      <property name="max" value="3"/>
+    </module>
+
+    <!--
+      <module name="ExplicitInitialization"/>
+    -->
+
+  </module>
+</module>

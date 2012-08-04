@@ -1,0 +1,11 @@
+# Ignore Idea files
+*.ipr
+*.iws
+*.ipr
+*.iml
+
+# Ignore idea directory
+.idea
+
+# Ignore maven directory
+target
