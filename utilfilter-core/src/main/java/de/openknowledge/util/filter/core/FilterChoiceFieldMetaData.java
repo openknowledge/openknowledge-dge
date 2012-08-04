@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.openknowledge.util.filter;
+package de.openknowledge.util.filter.core;
 
 import org.apache.commons.lang.Validate;
 
@@ -22,7 +22,7 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 
 /**
- * Manages the choices method for a {@link FilterChoiceField}.
+ * Manages the choices method for a {@link de.openknowledge.util.filter.core.annotation.FilterChoiceField}.
  *
  * @author Marc Petersen - open knowledge GmbH
  */
@@ -36,7 +36,7 @@ public class FilterChoiceFieldMetaData extends FilterFieldMetaData {
    * <p/>
    * The {@link FilterFieldType} of this class is always <code>SELECT</code>.
    * <p/>
-   * In addition to the {@link FilterFieldMetaData} such an object manages the choices for a {@link FilterField}.
+   * In addition to the {@link FilterFieldMetaData} such an object manages the choices for a {@link de.openknowledge.util.filter.core.annotation.FilterField}.
    *
    * @param aTargetMethod The targeted method.
    * @param aChoiceMethod The method which returns a list of possible choices.

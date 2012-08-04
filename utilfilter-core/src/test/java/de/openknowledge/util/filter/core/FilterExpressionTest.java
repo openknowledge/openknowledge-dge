@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package de.openknowledge.util.filter;
+package de.openknowledge.util.filter.core;
 
+import de.openknowledge.util.filter.core.annotation.FilterField;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +33,6 @@ import static org.junit.Assert.assertThat;
  */
 public class FilterExpressionTest {
 
-// TODO Do I really have to use NsfDate here??
   private FilteredTestLine l1;
   private FilteredTestLine l2;
   private FilteredTestLine l3;

@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package de.openknowledge.util.filter;
+package de.openknowledge.util.filter.core;
 
 /**
- * Defines the possible types of a {@link FilterField}.
+ * Defines the possible types of a {@link de.openknowledge.util.filter.core.annotation.FilterField}.
  * <p/>
- * Note: {@link #SELECT} should only be used with {@link FilterChoiceField}.
+ * Note: {@link #SELECT} should only be used with {@link de.openknowledge.util.filter.core.annotation.FilterChoiceField}.
  *
  * @author Marc Petersen - open knowledge GmbH
  */

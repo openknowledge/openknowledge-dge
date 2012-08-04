@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
-package de.openknowledge.util.filter;
+package de.openknowledge.util.filter.core;
 
-import java.io.Serializable;
+import de.openknowledge.util.filter.core.annotation.FilterChoice;
+import de.openknowledge.util.filter.core.annotation.FilterChoiceField;
+import de.openknowledge.util.filter.core.annotation.FilterField;
+
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -32,12 +35,12 @@ import java.util.Map;
 import static org.apache.commons.lang.Validate.notNull;
 
 /**
- * The <code>FilterManager</code> provides method/s to process the classes which contain {@link FilterField} and {@link FilterChoiceField}
+ * The <code>FilterManager</code> provides method/s to process the classes which contain {@link de.openknowledge.util.filter.core.annotation.FilterField} and {@link de.openknowledge.util.filter.core.annotation.FilterChoiceField}
  * annotations.
  *
  * @author Marc Petersen - open knowledge GmbH
  */
-public class FilterManager<T extends Collection> implements Serializable {
+public class FilterManager<T extends Collection> {
 
   private List<FilterFieldMetaData> filterFieldMetaData;
   private List<Class<?>> choiceManagers = new ArrayList<Class<?>>();
@@ -48,9 +51,9 @@ public class FilterManager<T extends Collection> implements Serializable {
    * Allocates a <code>FilterManager</code> object.
    * <p/>
    * <i>Note:</i> Use <code>FilterManager(Class<?> aFilterLine, Class<?>... theChoiceManagers)</code> if <code>aFilterLine</code> contains
-   * {@link FilterChoiceField} annotations.
+   * {@link de.openknowledge.util.filter.core.annotation.FilterChoiceField} annotations.
    *
-   * @param aFilterLine The class which contains {@link FilterField} annotations.
+   * @param aFilterLine The class which contains {@link de.openknowledge.util.filter.core.annotation.FilterField} annotations.
    */
   public FilterManager(Class<?> aFilterLine) {
     notNull(aFilterLine);
@@ -60,13 +63,13 @@ public class FilterManager<T extends Collection> implements Serializable {
   /**
    * Allocates a <code>FilterManager</code> object and initializes it so that it is able to extract {@link FilterFieldMetaData} from the
    * given <code>aFilterLine</code> class. It expects at least one class - <code>theChoiceManagers</code> - which contains {@link
-   * FilterChoice} annotations as sources for {@linkplain FilterChoiceField}s.
+   * de.openknowledge.util.filter.core.annotation.FilterChoice} annotations as sources for {@linkplain de.openknowledge.util.filter.core.annotation.FilterChoiceField}s.
    * <p/>
    * <i>Note</i>: Use <code>FilterManager(Class<?> aFilterLine)</code> if the <code>aFilterLine</code> class does not contain {@link
-   * FilterChoiceField} annotations
+   * de.openknowledge.util.filter.core.annotation.FilterChoiceField} annotations
    *
-   * @param aFilterLine The class which contains {@link FilterField} annotations.
-   * @param theChoiceManagers One or more classes to scan for {@link FilterChoice} annotations.
+   * @param aFilterLine The class which contains {@link de.openknowledge.util.filter.core.annotation.FilterField} annotations.
+   * @param theChoiceManagers One or more classes to scan for {@link de.openknowledge.util.filter.core.annotation.FilterChoice} annotations.
    */
   public FilterManager(Class<?> aFilterLine, Class<?>... theChoiceManagers) {
     this(aFilterLine);
@@ -99,7 +102,7 @@ public class FilterManager<T extends Collection> implements Serializable {
   }
 
   /**
-   * Extracts the methods from the <code>choiceManagers</code> which are annotated with {@link FilterChoice} and returns them as a map
+   * Extracts the methods from the <code>choiceManagers</code> which are annotated with {@link de.openknowledge.util.filter.core.annotation.FilterChoice} and returns them as a map
    * containing the annotated method as value and the annotation <code>sourceName</code> as key.
    *
    * @return The map of found choice methods.
@@ -123,19 +126,19 @@ public class FilterManager<T extends Collection> implements Serializable {
   }
 
   /**
-   * Assembles a list of {@link FilterFieldMetaData} based on {@link FilterField} and {@link FilterChoiceField} annotated methods.
+   * Assembles a list of {@link FilterFieldMetaData} based on {@link de.openknowledge.util.filter.core.annotation.FilterField} and {@link de.openknowledge.util.filter.core.annotation.FilterChoiceField} annotated methods.
    * <p/>
    * Procedure of this method is as follows:
    * <ol>
    * <li>This method iterates over all methods within the given <code>filterLine</code> class.</li>
-   * <li>A new {@link FilterFieldMetaData} object is instantiated and added to the list if a method is annotated as {@link FilterField}
+   * <li>A new {@link FilterFieldMetaData} object is instantiated and added to the list if a method is annotated as {@link de.openknowledge.util.filter.core.annotation.FilterField}
    * .</li>
    * <li>A new {@link FilterChoiceFieldMetaData} object is instantiated and added to the list if a method is annotated as {@link
-   * FilterChoiceField}.</li>
+   * de.openknowledge.util.filter.core.annotation.FilterChoiceField}.</li>
    * <li>Finally the list is sorted and can be retrieved by calling {@link #getFilterFieldMetaData()}</li>
    * </ol>
-   * @throws IllegalArgumentException if the return type of the {@link FilterField} method is not supported.
-   * @throws IllegalArgumentException if no corresponding {@link FilterChoice} method is found for a {@link FilterChoiceField}
+   * @throws IllegalArgumentException if the return type of the {@link de.openknowledge.util.filter.core.annotation.FilterField} method is not supported.
+   * @throws IllegalArgumentException if no corresponding {@link FilterChoice} method is found for a {@link de.openknowledge.util.filter.core.annotation.FilterChoiceField}
    * method.
    */
   protected void extractMetaData() {

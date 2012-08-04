@@ -17,7 +17,7 @@
     <module>utilfilter-build</module>
     <module>utilfilter-parent</module>
     <module>utilfilter-core</module>
-    <module>utilfilter-web</module>
+    <module>utilfilter-example-web</module>
   </modules>
 
 </project>

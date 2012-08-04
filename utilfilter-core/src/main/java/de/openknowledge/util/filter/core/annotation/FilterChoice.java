@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.openknowledge.util.filter;
+package de.openknowledge.util.filter.core.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;

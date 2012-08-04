@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
-package de.openknowledge.util.filter;
+package de.openknowledge.util.filter.core;
 
+import de.openknowledge.util.filter.core.annotation.FilterChoice;
+import de.openknowledge.util.filter.core.annotation.FilterChoiceField;
+import de.openknowledge.util.filter.core.annotation.FilterField;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
@@ -79,7 +82,7 @@ public class FilterManagerTest {
     assertThat(list.get(1).getOrder(), is(200));
   }
 
-  @Test
+  @Test                                                       <>
   public void createFilterChoiceMetaData() throws Exception {
     FilterManager fs = new FilterManager(FilteredChoiceTestLine.class, FilterTestManager.class);
     List<FilterFieldMetaData> list = fs.getFilterFieldMetaData();

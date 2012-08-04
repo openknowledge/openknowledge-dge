@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package de.openknowledge.util.filter;
+package de.openknowledge.util.filter.core;
 
-import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  * Manages the meta data for a FilterField. Most of the meta data should normally be retrieved from a method which is annotated with {@link
- * FilterField}.
+ * de.openknowledge.util.filter.core.annotation.FilterField}.
  *
  * @author Marc Petersen - open knowledge GmbH
  */
-public class FilterFieldMetaData implements Serializable {
+public class FilterFieldMetaData {
 
   private int order;
   private Method targetMethod;
@@ -36,12 +35,12 @@ public class FilterFieldMetaData implements Serializable {
 
   /**
    * Allocates a <code>FilterFieldMetaData</code> object and initializes it. Most of the parameters should be retrieved over a {@link
-   * FilterField} annotation.
+   * de.openknowledge.util.filter.core.annotation.FilterField} annotation.
    *
    * @param aType         The chosen {@link FilterFieldType}.
-   * @param aTargetMethod A {@link java.lang.reflect.Method} which should normally be retrieved through the {@link FilterField} annotation.
-   * @param aOrder        The order number which should normally be defined by the responding {@link FilterField} annotation.
-   * @param aDisplayName  A displayable name which should normally be defined by the responding {@link FilterField} annotation.
+   * @param aTargetMethod A {@link java.lang.reflect.Method} which should normally be retrieved through the {@link de.openknowledge.util.filter.core.annotation.FilterField} annotation.
+   * @param aOrder        The order number which should normally be defined by the responding {@link de.openknowledge.util.filter.core.annotation.FilterField} annotation.
+   * @param aDisplayName  A displayable name which should normally be defined by the responding {@link de.openknowledge.util.filter.core.annotation.FilterField} annotation.
    */
   public FilterFieldMetaData(FilterFieldType aType, Method aTargetMethod, int aOrder, String aDisplayName) {
     targetMethod = aTargetMethod;

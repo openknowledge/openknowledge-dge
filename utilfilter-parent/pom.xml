@@ -34,7 +34,7 @@
     <version.myfaces>2.1.8</version.myfaces>
     <version.owb>1.1.4</version.owb>
     <version.slf4j>1.6.6</version.slf4j>
-    <version.validation.api>1.1.0-Alpha1</version.validation.api>
+    <version.validation.api>1.0.0.GA</version.validation.api>
   </properties>
 
   <modelVersion>4.0.0</modelVersion>

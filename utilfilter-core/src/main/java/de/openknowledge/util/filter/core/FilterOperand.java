@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.openknowledge.util.filter;
+package de.openknowledge.util.filter.core;
 
 /**
  * Used to define the operand for a filter.

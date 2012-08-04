@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.openknowledge.util.filter;
+package de.openknowledge.util.filter.core;
 
 import org.junit.Test;
 import org.mockito.Mockito;

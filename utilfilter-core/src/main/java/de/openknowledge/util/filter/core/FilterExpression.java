@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-package de.openknowledge.util.filter;
-
-import java.io.Serializable;
+package de.openknowledge.util.filter.core;
 
 /**
  * A <code>FilterExpression</code> connects a pre-defined {@link FilterFieldMetaData} with a {@link FilterOperand} and a
@@ -25,7 +23,7 @@ import java.io.Serializable;
  * @author Marc Petersen - open knowledge GmbH
  */
 // TODO JavaDoc!
-public class FilterExpression<T extends Comparable> implements Serializable {
+public class FilterExpression<T extends Comparable> {
 
   private FilterFieldMetaData metaData;
   private FilterOperand filterOperand;

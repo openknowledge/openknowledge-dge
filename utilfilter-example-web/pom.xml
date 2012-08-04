@@ -11,8 +11,8 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.openknowledge.util</groupId>
-  <artifactId>utilfilter-web</artifactId>
-  <name>open knowledge Util Filter Web</name>
+  <artifactId>utilfilter-example-web</artifactId>
+  <name>open knowledge Util Filter Example Web</name>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
