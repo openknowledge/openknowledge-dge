@@ -47,15 +47,6 @@
     </dependency>
 
     <dependency>
-      <groupId>fm.void.jetm</groupId>
-      <artifactId>jetm</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>fm.void.jetm</groupId>
-      <artifactId>jetm-optional</artifactId>
-    </dependency>
-
-    <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging-api</artifactId>
     </dependency>

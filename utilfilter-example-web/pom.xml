@@ -35,6 +35,15 @@
         </configuration>
       </plugin>
 
+      <plugin>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>maven-jetty-plugin</artifactId>
+        <version>${version.maven.jetty.plugin}</version>
+        <configuration>
+          <scanIntervalSeconds>3</scanIntervalSeconds>
+        </configuration>
+      </plugin>
+
       <!-- dump current version to version.properties -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -60,10 +69,31 @@
 
   <dependencies>
 
+    <!-- JSF Dependencies -->
+
     <dependency>
-      <groupId>fm.void.jetm</groupId>
-      <artifactId>jetm</artifactId>
+      <groupId>javax.faces</groupId>
+      <artifactId>jsf-api</artifactId>
+      <version>2.0</version>
+      <scope>compile</scope>
     </dependency>
+
+    <dependency>
+      <groupId>com.sun.faces</groupId>
+      <artifactId>jsf-impl</artifactId>
+      <version>2.0.2-b10</version>
+      <scope>compile</scope>
+    </dependency>
+
+    <!-- CDI Dependencies -->
+
+    <dependency>
+      <groupId>org.jboss.weld.servlet</groupId>
+      <artifactId>weld-servlet</artifactId>
+      <version>1.0.1-Final</version>
+      <scope>compile</scope>
+    </dependency>
+
 
     <!-- this is wired, sl4j should not be part of the .war -->
     <dependency>
