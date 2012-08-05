@@ -82,7 +82,7 @@ public class FilterManagerTest {
     assertThat(list.get(1).getOrder(), is(200));
   }
 
-  @Test                                                       <>
+  @Test
   public void createFilterChoiceMetaData() throws Exception {
     FilterManager fs = new FilterManager(FilteredChoiceTestLine.class, FilterTestManager.class);
     List<FilterFieldMetaData> list = fs.getFilterFieldMetaData();

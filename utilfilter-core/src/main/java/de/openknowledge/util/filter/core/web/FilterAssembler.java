@@ -46,6 +46,11 @@ public class FilterAssembler implements Serializable {
   private boolean filterActive = false;
   private List<Object> filterChoiceObjects;
 
+  /**
+   * Allocates a <code>FilterAssembler</code> object and initializes it.
+   *
+   * @param aFilterManager The FilterManager instance.
+   */
   public FilterAssembler(FilterManager aFilterManager) {
     notNull(aFilterManager);
 
@@ -103,12 +108,19 @@ public class FilterAssembler implements Serializable {
     filterRows.add(new FilterRow());
   }
 
+  /**
+   * Removes all <code>FilterRows</code> and adds one empty <code>FilterRow</code>.
+   */
   public void resetFilter() {
     filterRows = new ArrayList<FilterRow>();
     filterRows.add(new FilterRow());
     filterManager.resetExpressions();
   }
 
+  /**
+   * UI Helper to decide whether to filter the objects or not.
+   * @return
+   */
   public boolean isFilterActive() {
     return filterActive;
   }
