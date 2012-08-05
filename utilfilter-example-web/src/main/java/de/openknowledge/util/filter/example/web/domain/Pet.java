@@ -20,8 +20,6 @@ import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 import org.joda.time.Years;
 
-import javax.print.attribute.standard.DateTimeAtCompleted;
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
