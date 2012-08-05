@@ -17,6 +17,8 @@
 package de.openknowledge.util.filter.example.web.bean;
 
 import de.openknowledge.util.filter.example.web.domain.Pet;
+import de.openknowledge.util.filter.example.web.domain.Species;
+import org.joda.time.DateMidnight;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -50,11 +52,27 @@ public class PetBean {
     pets = new ArrayList<Pet>();
 
     Pet p1 = new Pet();
-    p1.setName("Pet One");
+    p1.setName("Funny");
+    p1.setSpecies(Species.DOG);
+    p1.setDateOfBirth(new DateMidnight(1990, 2, 3).toDate());
     pets.add(p1);
 
     Pet p2 = new Pet();
-    p2.setName("Pet Two");
+    p2.setName("Evi");
+    p2.setSpecies(Species.CAT);
+    p2.setDateOfBirth(new DateMidnight(1996, 7, 14).toDate());
     pets.add(p2);
+
+    Pet p3 = new Pet();
+    p3.setName("Bandit");
+    p3.setSpecies(Species.DOG);
+    p3.setDateOfBirth(new DateMidnight(2011, 5, 5).toDate());
+    pets.add(p3);
+
+    Pet p4 = new Pet();
+    p4.setName("Whisky");
+    p4.setSpecies(Species.CAT);
+    p4.setDateOfBirth(new DateMidnight(2011, 4, 20).toDate());
+    pets.add(p4);
   }
 }

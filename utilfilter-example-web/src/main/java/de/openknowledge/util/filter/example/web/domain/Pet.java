@@ -16,19 +16,24 @@
 
 package de.openknowledge.util.filter.example.web.domain;
 
+import org.joda.time.DateMidnight;
+import org.joda.time.DateTime;
+import org.joda.time.Years;
+
+import javax.print.attribute.standard.DateTimeAtCompleted;
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
- * Pet attributes used from this site: http://de.wikipedia.org/wiki/EU-Heimtierausweis
- *
  * @author Marc Petersen - open knowledge GmbH
  */
 public class Pet {
 
-  // TODO Not sure if the DDD approach should be used for this example.
-
   private String name;
 
-  // TODO Add more attributes.
+  private Date dateOfBirth;
 
+  private Species species;
 
   public String getName() {
     return name;
@@ -36,5 +41,25 @@ public class Pet {
 
   public void setName(String aName) {
     name = aName;
+  }
+
+  public Integer getAge() {
+    return Years.yearsBetween(new DateMidnight(getDateOfBirth()), new DateTime()).getYears();
+  }
+
+  public Date getDateOfBirth() {
+    return dateOfBirth;
+  }
+
+  public void setDateOfBirth(Date aDateOfBirth) {
+    dateOfBirth = aDateOfBirth;
+  }
+
+  public Species getSpecies() {
+    return species;
+  }
+
+  public void setSpecies(Species aSpecies) {
+    species = aSpecies;
   }
 }

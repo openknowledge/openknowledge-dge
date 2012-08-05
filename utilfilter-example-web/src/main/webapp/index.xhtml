@@ -10,15 +10,21 @@
   <h:head/>
   <h:body>
     <h1>Pets</h1>
-    <table>
+    <table border="1" style="width: 100%">
       <tr>
-        <td>Name</td>
-        <td>Date of Birth</td>
+        <th>Name</th>
+        <th>Species</th>
+        <th>Date of Birth</th>
+        <th>Age</th>
       </tr>
       <ui:repeat value="#{petBean.pets}" var="pet">
         <tr>
           <td>#{pet.name}</td>
-          <td></td>
+          <td>#{pet.species}</td>
+          <td style="text-align: right;">
+            <h:outputText value="#{pet.dateOfBirth}"><f:convertDateTime dateStyle="long" timeZone="EST" type="date" /></h:outputText>
+          </td>
+          <td style="text-align: right;">#{pet.age}</td>
         </tr>
       </ui:repeat>
     </table>

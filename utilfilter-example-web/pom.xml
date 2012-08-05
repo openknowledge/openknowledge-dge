@@ -94,6 +94,13 @@
       <scope>compile</scope>
     </dependency>
 
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+      <version>2.1</version>
+      <scope>compile</scope>
+    </dependency>
+
 
     <!-- this is wired, sl4j should not be part of the .war -->
     <dependency>
