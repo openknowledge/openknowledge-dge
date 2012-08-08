@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright open knowledge GmbH
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+
+<composite:interface>
+  <composite:attribute name="update"/>
+  <composite:attribute name="filterAssembler"/>
+  <composite:attribute name="applyFilterBean"/>
+</composite:interface>
+
+<composite:implementation>
+
+    <style type="text/css">
+    input[id$=-value_input] {
+      -moz-border-radius: 0 !important;
+      -webkit-border-radius: 0 !important;
+      border-radius: 0 !important;
+      -moz-box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+      padding: 0px !important;
+      font-weight: normal !important;
+      width: 150px !important;
+    }
+  </style>
+
+  <h:panelGroup layout="block" rendered="#{cc.attrs.filterAssembler.filterActive}">
+    <table style="width: 100%; padding-bottom: 10px;">
+      <tr>
+        <td style="width: 70%">
+    <h:panelGroup layout="block" id="filter" style="width: 98%;padding-left: 6px; padding-top: 6px;">
+      <table style="width: 100%">
+        <ui:repeat value="#{cc.attrs.filterAssembler.filterRows}" var="row" varStatus="status">
+        <tr id="filter-#{status.index}">
+          <td style="width: 15%">
+            <h:selectOneMenu id="filter-metaData"
+                             style="background-color: white;"
+                             immediate="true"
+                             value="#{row.metaDataName}">
+              <f:selectItem itemValue="#{null}"
+                            noSelectionOption="true"
+                            itemLabel="" />
+              <f:selectItems var="metaData"
+                             value="#{cc.attrs.filterAssembler.filterFieldMetaData}"
+                             itemValue="#{metaData.targetMethod.name}"
+                             itemLabel="#{metaData.displayName}" />
+              <p:ajax event="valueChange" update="filterType filter-input" process="@this" />
+            </h:selectOneMenu>
+
+            <h:inputHidden id="filterType" value="#{row.filterFieldType}" />
+          </td>
+          <td style="width: 25%; min-width: 300px;max-width: 350px;">
+            <h:panelGroup layout="block" id="filter-input">
+              <h:panelGroup layout="block" id="filter-input-bigdecimal" rendered="#{row.metaData.type eq 'BIGDECIMAL'}">
+                <h:selectOneMenu id="filter-bigdecimal-operand"
+                                 style="margin-right: 15px; margin-left: 15px; width: 112px; background-color: white;"
+                                 value="#{row.stringFilterOperand}">
+                  <f:selectItem itemValue="#{null}"
+                            noSelectionOption="true"
+                            itemLabel="" />
+                  <f:selectItem itemValue="LT"
+                                itemLabel="lower than" />
+                  <f:selectItem itemValue="EQ"
+                                itemLabel="equal to" />
+                  <f:selectItem itemValue="GT"
+                                itemLabel="greater than" />
+                  <p:ajax event="valueChange" process="@this" />
+                </h:selectOneMenu>
+
+                <h:inputText id="filter-input-bigdecimal-value"
+                             style="width: 150px;"
+                             value="#{row.bigDecimal}">
+                  <p:ajax event="valueChange" process="@this" />
+                </h:inputText>
+              </h:panelGroup>
+
+              <h:panelGroup layout="block" id="filter-input-date" rendered="#{row.metaData.type eq 'DATE'}">
+                <h:selectOneMenu id="filter-date-operand"
+                                 style="margin-right: 15px; margin-left: 15px; width: 112px; background-color: white;"
+                                 value="#{row.stringFilterOperand}">
+                  <f:selectItem itemValue="#{null}"
+                                noSelectionOption="true"
+                                itemLabel="" />
+                  <f:selectItem itemValue="LT"
+                                itemLabel="before" />
+                  <f:selectItem itemValue="EQ"
+                                itemLabel="equal" />
+                  <f:selectItem itemValue="GT"
+                                itemLabel="after" />
+                  <p:ajax event="valueChange" process="@this" />
+                </h:selectOneMenu>
+
+                <p:calendar navigator="true"
+                            id="filter-input-date-value"
+                            style="font-weight: normal !important;"
+
+                            value="#{row.date}"
+                            immediate="true"
+                            readOnlyInputText="true">
+                  <p:ajax event="dateSelect" process="@this" />
+                </p:calendar>
+              </h:panelGroup>
+
+              <h:panelGroup layout="block" id="filter-input-select" rendered="#{row.metaData.type eq 'SELECT'}">
+
+                <h:selectOneMenu id="filter-select-value"
+                                 style="margin-left: 142px; width: 152px; background-color: white;"
+                                 immediate="true"
+                                 value="#{row.selection}">
+                  <f:selectItem itemValue="#{null}"
+                                noSelectionOption="true"
+                                itemLabel="" />
+                  <f:selectItems var="selection"
+                                 value="#{row.choiceValues}"
+                                 itemValue="#{selection.toString}"
+                                 itemLabel="#{selection}" />
+                  <p:ajax event="valueChange" process="@this" />
+                </h:selectOneMenu>
+              </h:panelGroup>
+            </h:panelGroup>
+          </td>
+          <td style="width: 30%">
+            <div class="button" style="margin-top: 3px;">
+              <p:commandLink styleClass="button_a"
+                             oncomplete="$('[id$=hiddenUpdate]').click()"
+                             process="@this"
+                             actionListener="#{cc.attrs.filterAssembler.removeFilterRow(row)}">
+                <span class="button_bg_right">
+                  <span style="line-height: 20px; height: 20px;" class="txt"> - </span>
+                </span>
+              </p:commandLink>
+              <span class="clear_both"/>
+            </div>
+            <h:panelGroup layout="block" rendered="#{status.last}">
+            <div class="button" style="margin-top: 3px;">
+              <p:commandLink styleClass="button_a"
+                             oncomplete="$('[id$=hiddenUpdate]').click()"
+                             process="@this"
+                             actionListener="#{cc.attrs.filterAssembler.addNewFilterRow()}">
+                <span class="button_bg_right">
+                  <span style="line-height: 20px; height: 20px;" class="txt"> + </span>
+                </span>
+              </p:commandLink>
+              <span class="clear_both"/>
+            </div>
+            </h:panelGroup>
+          </td>
+        </tr>
+        </ui:repeat>
+      </table>
+    </h:panelGroup>
+    </td>
+
+    <td style="width: 18%; vertical-align: bottom;">
+      <div style="float: right;">
+        <div class="button">
+          <p:commandLink styleClass="button_a"
+                         id="applyFilter"
+                         style="font-weight: normal;"
+                         update="filter #{cc.attrs.update}"
+                         process="@this"
+                         actionListener="#{cc.attrs.applyFilterBean.applyFilter()}">
+            <span class="button_bg_right">
+              <span style="line-height: 20px; height: 20px;" class="txt"> #{msg.get('button.apply')} </span>
+            </span>
+          </p:commandLink>
+          <span class="clear_both"/>
+        </div>
+        <div class="button">
+          <p:commandLink styleClass="button_a"
+                         update="filter #{cc.attrs.update}"
+                         style="font-weight: normal;"
+                         process="@this"
+                         oncomplete="$('[id$=applyFilter]').click()"
+                         actionListener="#{cc.attrs.filterAssembler.resetFilter()}">
+            <span class="button_bg_right">
+              <span style="line-height: 20px; height: 20px;" class="txt"> #{msg.get('button.reset')} </span>
+            </span>
+          </p:commandLink>
+          <span class="clear_both"/>
+        </div>
+      </div>
+    </td>
+    </tr>
+    </table>
+    <p:commandLink id="hiddenUpdate"
+                   style="display: none;"
+                   update="filter"
+                   process="@this" />
+  </h:panelGroup>
+
+</composite:implementation>
+</body>
+</html>

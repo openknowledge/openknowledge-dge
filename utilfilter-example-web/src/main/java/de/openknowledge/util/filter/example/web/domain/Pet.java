@@ -16,10 +16,12 @@
 
 package de.openknowledge.util.filter.example.web.domain;
 
+import de.openknowledge.util.filter.core.annotation.FilterField;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 import org.joda.time.Years;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -41,10 +43,12 @@ public class Pet {
     name = aName;
   }
 
-  public Integer getAge() {
-    return Years.yearsBetween(new DateMidnight(getDateOfBirth()), new DateTime()).getYears();
+  @FilterField(order = 100, displayName = "Age")
+  public BigDecimal getAge() {
+    return new BigDecimal(Years.yearsBetween(new DateMidnight(getDateOfBirth()), new DateTime()).getYears());
   }
 
+  @FilterField(order = 200, displayName = "Date of Birth")
   public Date getDateOfBirth() {
     return dateOfBirth;
   }

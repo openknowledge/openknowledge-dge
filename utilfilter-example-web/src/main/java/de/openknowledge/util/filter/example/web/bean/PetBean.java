@@ -16,13 +16,16 @@
 
 package de.openknowledge.util.filter.example.web.bean;
 
+import de.openknowledge.util.filter.core.FilterManager;
+import de.openknowledge.util.filter.core.web.FilterAssembler;
 import de.openknowledge.util.filter.example.web.domain.Pet;
 import de.openknowledge.util.filter.example.web.domain.Species;
 import org.joda.time.DateMidnight;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +33,11 @@ import java.util.List;
  * @author Marc Petersen - open knowledge GmbH
  */
 @Named
-@RequestScoped
-public class PetBean {
+@SessionScoped
+public class PetBean implements Serializable {
 
   private List<Pet> pets;
+  private FilterAssembler filterAssembler;
 
   protected PetBean() {
 
@@ -45,6 +49,18 @@ public class PetBean {
 
   public void setPets(List<Pet> aPets) {
     pets = aPets;
+  }
+
+  public FilterAssembler getFilterAssembler() {
+    if(filterAssembler == null) {
+      filterAssembler = new FilterAssembler(new FilterManager<List>(Pet.class));
+      filterAssembler.setFilterActive(true);
+    }
+    return filterAssembler;
+  }
+
+  public void applyFilter() {
+    // doing nothing yet.
   }
 
   @PostConstruct

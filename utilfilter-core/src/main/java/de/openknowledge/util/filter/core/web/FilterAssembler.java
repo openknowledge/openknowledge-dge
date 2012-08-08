@@ -16,12 +16,12 @@
 
 package de.openknowledge.util.filter.core.web;
 
-import de.openknowledge.util.filter.core.FilterExpression;
-import de.openknowledge.util.filter.core.FilterManager;
-import de.openknowledge.util.filter.core.FilterOperand;
 import de.openknowledge.util.filter.core.FilterChoiceFieldMetaData;
+import de.openknowledge.util.filter.core.FilterExpression;
 import de.openknowledge.util.filter.core.FilterFieldMetaData;
 import de.openknowledge.util.filter.core.FilterFieldType;
+import de.openknowledge.util.filter.core.FilterManager;
+import de.openknowledge.util.filter.core.FilterOperand;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -210,6 +210,17 @@ public class FilterAssembler implements Serializable {
 
     public void setFilterOperand(FilterOperand aFilterOperand) {
       filterOperand = aFilterOperand;
+    }
+
+    public void setStringFilterOperand(String aFilterOperand) {
+      setFilterOperand(FilterOperand.valueOf(aFilterOperand));
+    }
+
+    public String getStringFilterOperand() {
+      if (filterOperand == null) {
+        return "";
+      }
+      return filterOperand.toString();
     }
 
     public FilterFieldMetaData getMetaData() {

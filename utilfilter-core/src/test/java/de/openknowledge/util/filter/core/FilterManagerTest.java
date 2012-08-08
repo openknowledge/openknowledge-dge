@@ -113,12 +113,10 @@ public class FilterManagerTest {
 
     private BigDecimal foo;
     private Date bar;
-    private String yadda;
 
-    public FilteredTestLine(BigDecimal aFoo, Date aBar, String aYadda) {
+    public FilteredTestLine(BigDecimal aFoo, Date aBar) {
       foo = aFoo;
       bar = aBar;
-      yadda = aYadda;
     }
 
     @FilterField(order = 200, displayName = "Bar")
