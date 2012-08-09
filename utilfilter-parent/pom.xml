@@ -38,7 +38,7 @@
     <version.hamcrest>1.3</version.hamcrest>
     <version.jdepend.maven.plugin>2.0-beta-2</version.jdepend.maven.plugin>
     <version.joda>2.1</version.joda>
-    <version.juel>2.2.5</version.juel>
+    <version.juel>2.2.4</version.juel>
     <version.junit>4.10</version.junit>
     <version.log4j>1.2.17</version.log4j>
     <version.maven.antrun.plugin>1.7</version.maven.antrun.plugin>
@@ -52,7 +52,7 @@
     <version.maven.surefire.plugin>2.12.1</version.maven.surefire.plugin>
     <version.maven.war.plugin>2.2</version.maven.war.plugin>
     <version.mockito>1.9.5-rc1</version.mockito>
-    <version.myfaces>2.1.8</version.myfaces>
+    <version.myfaces>2.1.6</version.myfaces>
     <version.owb>1.1.4</version.owb>
     <version.prettyFaces>3.3.3</version.prettyFaces>
     <version.primefaces>3.3.1</version.primefaces>
