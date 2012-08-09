@@ -21,13 +21,14 @@ import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 import org.joda.time.Years;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  * @author Marc Petersen - open knowledge GmbH
  */
-public class Pet {
+public class Pet implements Serializable {
 
   private String name;
 

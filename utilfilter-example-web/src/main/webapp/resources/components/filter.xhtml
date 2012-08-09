@@ -48,11 +48,10 @@
     }
   </style>
 
-  <h:panelGroup layout="block" rendered="#{cc.attrs.filterAssembler.filterActive}">
+  <h:panelGroup layout="block" id="filter" rendered="#{cc.attrs.filterAssembler.filterActive}">
     <table style="width: 100%; padding-bottom: 10px;">
       <tr>
         <td style="width: 70%">
-          <h:panelGroup layout="block" id="filter" style="width: 98%;padding-left: 6px; padding-top: 6px;">
             <table style="width: 100%">
               <ui:repeat value="#{cc.attrs.filterAssembler.filterRows}" var="row" varStatus="status">
                 <tr id="filter-#{status.index}">
@@ -73,7 +72,7 @@
 
                     <h:inputHidden id="filterType" value="#{row.filterFieldType}"/>
                   </td>
-                  <td style="width: 25%; min-width: 300px;max-width: 350px;">
+                  <td style="width: 25%; min-width: 350px;max-width: 450px;">
                     <h:panelGroup layout="block" id="filter-input">
                       <h:panelGroup layout="block" id="filter-input-bigdecimal" rendered="#{row.filterFieldType eq 'BIGDECIMAL'}">
                         <h:selectOneMenu id="filter-bigdecimal-operand"
@@ -144,42 +143,35 @@
                     </h:panelGroup>
                   </td>
                   <td style="width: 30%">
-                    <p:commandLink styleClass="button_a"
-                                   oncomplete="jsf.ajax.request('filter', null, { render: 'filter' });"
-                                   process="@this"
+                    <h:commandLink process="@this"
                                    value=" - "
                                    actionListener="#{cc.attrs.filterAssembler.removeFilterRow(row)}"/>
-                    <p:commandLink rendered="#{status.last}"
-                                   oncomplete="jsf.ajax.request('filter', null, { render: 'filter' });"
-                                   process="@this"
+                    <h:commandLink rendered="#{status.last}"
+                                   process="@none"
                                    value=" + "
-                                   actionListener="#{cc.attrs.filterAssembler.addNewFilterRow()}"/>
+                                   actionListener="#{cc.attrs.filterAssembler.addNewFilterRow}"/>
 
                   </td>
                 </tr>
               </ui:repeat>
             </table>
-          </h:panelGroup>
         </td>
 
         <td style="width: 18%; vertical-align: bottom;">
           <div style="float: right;">
 
-            <p:commandButton styleClass="button_a"
-                             id="applyFilter"
+            <h:commandButton id="applyFilter"
                              update="filter #{cc.attrs.update}"
-                             process="@this"
+                             process="@none"
                              value="Apply"
-                             oncomplete="jsf.ajax.request('filter', null, { render: 'filter' });"
-                             actionListener="#{cc.attrs.applyFilterBean.applyFilter()}"/>
+                             actionListener="#{cc.attrs.applyFilterBean.applyFilter}"/>
 
-            <p:commandButton styleClass="button_a"
+            <h:commandButton styleClass="button_a"
                              update="filter #{cc.attrs.update}"
                              style="font-weight: normal;"
-                             process="@this"
+                             process="@none"
                              value="Reset"
-                             oncomplete="jsf.ajax.request('filter', null, { render: 'filter' });"
-                             actionListener="#{cc.attrs.filterAssembler.resetFilter()}"/>
+                             actionListener="#{cc.attrs.filterAssembler.resetFilter}"/>
           </div>
         </td>
       </tr>

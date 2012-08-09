@@ -19,6 +19,8 @@ package de.openknowledge.util.filter.example.web.bean;
 import de.openknowledge.util.filter.core.web.FilterAssembler;
 import de.openknowledge.util.filter.example.web.domain.Pet;
 import de.openknowledge.util.filter.example.web.domain.Species;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.joda.time.DateMidnight;
 
 import javax.annotation.PostConstruct;
@@ -35,6 +37,8 @@ import java.util.List;
 @SessionScoped
 public class PetBean implements Serializable {
 
+  private static final Log LOG = LogFactory.getLog(PetBean.class);
+
   private List<Pet> pets;
   private FilterAssembler filterAssembler;
 
@@ -43,16 +47,16 @@ public class PetBean implements Serializable {
   }
 
   public List<Pet> getPets() {
-    return pets;
+    return (List<Pet>)getFilterAssembler().filter(new ArrayList(pets));
   }
 
   public void setPets(List<Pet> aPets) {
     pets = aPets;
   }
 
-  public FilterAssembler getFilterAssembler() {
+  public FilterAssembler<List<Pet>> getFilterAssembler() {
     if(filterAssembler == null) {
-      filterAssembler = new FilterAssembler<List>(Pet.class);
+      filterAssembler = new FilterAssembler<List<Pet>>(Pet.class);
       filterAssembler.setFilterActive(true);
     }
     return filterAssembler;
@@ -60,6 +64,7 @@ public class PetBean implements Serializable {
 
   public void applyFilter() {
     // doing nothing yet.
+    LOG.info("applying filter");
   }
 
   @PostConstruct

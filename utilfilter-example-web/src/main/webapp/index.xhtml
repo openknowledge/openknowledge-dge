@@ -77,6 +77,7 @@
         <div class="span12">
           <h:panelGroup id="filterPanel">
             <ok:filter update=":contentForm:petTable"
+                      id="okFilter"
                       filterAssembler="#{petBean.filterAssembler}"
                       applyFilterBean="#{petBean}"/>
           </h:panelGroup>
