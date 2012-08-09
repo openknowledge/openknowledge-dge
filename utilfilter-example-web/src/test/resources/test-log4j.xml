@@ -13,7 +13,10 @@
     <priority value="WARN"/>
   </category>
 
-  <!-- MAYBE activate later
+  <category name="org.apache.commons.digester">
+    <priority value="WARN"/>
+  </category>
+
   <category name="org.apache.http">
     <priority value="INFO"/>
   </category>
@@ -35,7 +38,7 @@
   <category name="org.jboss.resteasy.core.SynchronousDispatcher">
     <priority value="ERROR"/>
   </category>
-  -->
+
 
   <root>
     <appender-ref ref="console"/>
