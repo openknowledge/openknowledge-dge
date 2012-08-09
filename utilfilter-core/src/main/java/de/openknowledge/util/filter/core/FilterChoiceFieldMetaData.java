@@ -29,14 +29,14 @@ import java.util.Collection;
 public class FilterChoiceFieldMetaData extends FilterFieldMetaData {
 
   private Method choiceMethod;
-  private Object choiceValues;
 
   /**
    * Allocates a <code>FilterChoiceFieldMetaData</code> object and initializes it.
    * <p/>
    * The {@link FilterFieldType} of this class is always <code>SELECT</code>.
    * <p/>
-   * In addition to the {@link FilterFieldMetaData} such an object manages the choices for a {@link de.openknowledge.util.filter.core.annotation.FilterField}.
+   * In addition to the {@link FilterFieldMetaData} such an object manages the choices for a {@link
+   * de.openknowledge.util.filter.core.annotation.FilterField}.
    *
    * @param aTargetMethod The targeted method.
    * @param aChoiceMethod The method which returns a list of possible choices.
@@ -47,8 +47,8 @@ public class FilterChoiceFieldMetaData extends FilterFieldMetaData {
     super(FilterFieldType.SELECT, aTargetMethod, aOrder, aDisplayName);
 
     Validate.isTrue(Collection.class.isAssignableFrom(aChoiceMethod.getReturnType()),
-                           "choiceMethod must have a return type which implements Collection. Return type of " + aChoiceMethod.getName()
-                                   + " is " + aChoiceMethod.getReturnType().toString());
+                    "choiceMethod must have a return type which implements Collection. Return type of " + aChoiceMethod.getName()
+                     + " is " + aChoiceMethod.getReturnType().toString());
 
     // TODO Maybe validate that the return type of the targetMethod must be the same as the Collection type of the choiceMethod.
 

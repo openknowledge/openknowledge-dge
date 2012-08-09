@@ -22,6 +22,8 @@ import de.openknowledge.util.filter.core.FilterFieldMetaData;
 import de.openknowledge.util.filter.core.FilterFieldType;
 import de.openknowledge.util.filter.core.FilterManager;
 import de.openknowledge.util.filter.core.FilterOperand;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -34,51 +36,93 @@ import java.util.List;
 import static org.apache.commons.lang.Validate.notNull;
 
 /**
- * Represents the filter rows for the dynamic filter form. Finally the valid filter rows must be converted into a FilterExpression.
+ * Represents the filter rows for a dynamic filter form. Finally the valid filter rows must be converted into a FilterExpression.
  *
  * @author Marc Petersen - open knowledge GmbH
  */
-public class FilterAssembler implements Serializable {
+public class FilterAssembler<T extends Collection> implements Serializable {
+
+  private static final Log LOG = LogFactory.getLog(FilterAssembler.class);
+
+  private boolean filterActive = false;
+  private List<FilterOperand> possibleOperands = Arrays.asList(FilterOperand.values());
 
   private List<FilterRow> filterRows;
-  private FilterManager filterManager;
-  private List<FilterOperand> possibleOperands;
-  private boolean filterActive = false;
-  private List<Object> filterChoiceObjects;
+  private Class<?> filterLine;
+  private List<Object> filterChoiceHolders = new ArrayList<Object>();
+
+  private transient FilterManager filterManager;
 
   /**
-   * Allocates a <code>FilterAssembler</code> object and initializes it.
+   * Allocates a <code>FilterAssembler</code> object.
+   * <p/>
+   * <i>Note:</i> Use <code>FilterAssembler(Class<?> aFilterLine, Class<?>... theChoiceManagers)</code> if <code>aFilterLine</code> contains
+   * {@link de.openknowledge.util.filter.core.annotation.FilterChoiceField} annotations.
    *
-   * @param aFilterManager The FilterManager instance.
+   * @param aFilterLine The class which contains {@link de.openknowledge.util.filter.core.annotation.FilterField} annotations.
    */
-  public FilterAssembler(FilterManager aFilterManager) {
-    notNull(aFilterManager);
+  public FilterAssembler(Class<?> aFilterLine) {
+    notNull(aFilterLine);
 
-    filterManager = aFilterManager;
-    possibleOperands = Arrays.asList(FilterOperand.values());
+    filterLine = aFilterLine;
+
     resetFilter();
   }
 
-  public FilterAssembler(FilterManager aFilterManager, Object... aFilterChoiceObjects) {
-    this(aFilterManager);
-    filterChoiceObjects = Arrays.asList(aFilterChoiceObjects);
+  /**
+   * Allocates a <code>FilterManager</code> object and initializes it so that it is able to extract {@link FilterFieldMetaData} from the
+   * given <code>aFilterLine</code> class. It expects at least one class - <code>theChoiceHolders</code> - which contains {@link
+   * de.openknowledge.util.filter.core.annotation.FilterChoice} annotations as sources for {@linkplain
+   * de.openknowledge.util.filter.core.annotation.FilterChoiceField}s.
+   * <p/>
+   * <i>Note</i>: Use <code>FilterManager(Class<?> aFilterLine)</code> if the <code>aFilterLine</code> class does not contain {@link
+   * de.openknowledge.util.filter.core.annotation.FilterChoiceField} annotations
+   *
+   * @param aFilterLine      The class which contains {@link de.openknowledge.util.filter.core.annotation.FilterField} annotations.
+   * @param theChoiceHolders One or more classes to scan for {@link de.openknowledge.util.filter.core.annotation.FilterChoice} annotations.
+   */
+  public FilterAssembler(Class<?> aFilterLine, Object... theChoiceHolders) {
+    notNull(aFilterLine);
+    notNull(theChoiceHolders);
+
+    filterChoiceHolders = Arrays.asList(theChoiceHolders);
+    filterLine = aFilterLine;
+
+    resetFilter();
   }
 
+  /**
+   * @param collection
+   * @return
+   */
+  // TODO JavaDoc!
   public Collection filter(Collection collection) {
-    filterManager.resetExpressions();
+    getFilterManager().resetExpressions();
+
     for (FilterRow row : filterRows) {
       FilterExpression fe = row.asExpression();
       if (fe != null) {
-        filterManager.addExpression(fe);
+        LOG.info("Adding FilterExpression '" + fe + "' to filterManager.");
+        getFilterManager().addExpression(fe);
+      } else {
+        LOG.info("FilterRow  '" + row + "' is not a valid FilterExpression.");
       }
     }
 
-    return filterManager.filter(collection);
+    LOG.info("FilterManager contains " + getFilterManager().getExpressions().size() + " FilterExpressions.");
+    return getFilterManager().filter(collection);
   }
 
-  public FilterFieldMetaData getMetaDataByString(String meta) {
+  /**
+   * @param methodName
+   * @return
+   */
+  // TODO JavaDoc!
+  protected FilterFieldMetaData getMetaDataByString(String methodName) {
+    notNull(methodName);
+
     for (FilterFieldMetaData data : getFilterFieldMetaData()) {
-      if (data.getTargetMethod().getName().equals(meta)) {
+      if (data.getTargetMethod().getName().equals(methodName)) {
         return data;
       }
     }
@@ -86,7 +130,7 @@ public class FilterAssembler implements Serializable {
   }
 
   public List<FilterFieldMetaData> getFilterFieldMetaData() {
-    return filterManager.getFilterFieldMetaData();
+    return getFilterManager().getFilterFieldMetaData();
   }
 
   public List<FilterRow> getFilterRows() {
@@ -99,7 +143,7 @@ public class FilterAssembler implements Serializable {
 
   public void removeFilterRow(FilterRow row) {
     filterRows.remove(row);
-    if(filterRows.isEmpty()) {
+    if (filterRows.isEmpty()) {
       filterRows.add(new FilterRow());
     }
   }
@@ -114,11 +158,20 @@ public class FilterAssembler implements Serializable {
   public void resetFilter() {
     filterRows = new ArrayList<FilterRow>();
     filterRows.add(new FilterRow());
-    filterManager.resetExpressions();
+    getFilterManager().resetExpressions();
+    LOG.info("Filter has been reset.");
+  }
+
+  protected FilterManager getFilterManager() {
+    if (filterManager == null) {
+      filterManager = new FilterManager<T>(filterLine, filterChoiceHolders);
+    }
+    return filterManager;
   }
 
   /**
    * UI Helper to decide whether to filter the objects or not.
+   *
    * @return
    */
   public boolean isFilterActive() {
@@ -127,14 +180,15 @@ public class FilterAssembler implements Serializable {
 
   public void setFilterActive(boolean aFilterActive) {
     filterActive = aFilterActive;
-    if(!filterActive) {
+    if (!filterActive) {
       resetFilter();
     }
   }
 
   public class FilterRow implements Serializable {
 
-    private FilterFieldMetaData metaData;
+    private String methodName;
+    private transient FilterFieldMetaData metaData;
     private FilterOperand filterOperand;
 
     private Object selection;
@@ -147,7 +201,7 @@ public class FilterAssembler implements Serializable {
 
     public FilterExpression asExpression() {
       if (isValid()) {
-        return new FilterExpression(metaData, filterOperand, getValue());
+        return new FilterExpression(getMetaData(), filterOperand, getValue());
       }
       return null;
     }
@@ -161,7 +215,7 @@ public class FilterAssembler implements Serializable {
         case SELECT:
           return (Comparable) selection;
         default:
-          throw new IllegalArgumentException("Type not supported: " + metaData.getType());
+          throw new IllegalArgumentException("Type not supported: " + getMetaData().getType());
       }
     }
 
@@ -171,7 +225,7 @@ public class FilterAssembler implements Serializable {
      * @return Returns <code>true</code> if the object is valid, otherwise <code>false</code>
      */
     public boolean isValid() {
-      if (metaData == null) {
+      if (getMetaData() == null) {
         return false;
       }
 
@@ -187,10 +241,10 @@ public class FilterAssembler implements Serializable {
     }
 
     public Collection getChoiceValues() {
-      if (metaData instanceof FilterChoiceFieldMetaData) {
-        for (Object o : filterChoiceObjects) {
+      if (getMetaData() instanceof FilterChoiceFieldMetaData) {
+        for (Object o : filterChoiceHolders) {
           try {
-            return (Collection) ((FilterChoiceFieldMetaData) metaData).getChoiceValues(o);
+            return (Collection) ((FilterChoiceFieldMetaData) getMetaData()).getChoiceValues(o);
           } catch (RuntimeException e) {
             // expected.
           }
@@ -223,19 +277,8 @@ public class FilterAssembler implements Serializable {
       return filterOperand.toString();
     }
 
-    public FilterFieldMetaData getMetaData() {
-      return metaData;
-    }
-
-    public void setMetaData(FilterFieldMetaData aMetaData) {
-      metaData = aMetaData;
-      if(aMetaData instanceof FilterChoiceFieldMetaData) {
-        filterOperand = FilterOperand.EQ;
-      }
-    }
-
     public String getSelection() {
-      if(selection != null) {
+      if (selection != null) {
         return selection.toString();
       }
       return null;
@@ -253,20 +296,20 @@ public class FilterAssembler implements Serializable {
       bigDecimal = aBigDecimal;
     }
 
-    public String getMetaDataName() {
-      if (metaData != null) {
-        return metaData.getTargetMethod().getName();
+    public String getMethodName() {
+      if (getMetaData() != null) {
+        return getMetaData().getTargetMethod().getName();
       }
       return null;
     }
 
-    public void setMetaDataName(String aMetaDataName) {
-      setMetaData(getMetaDataByString(aMetaDataName));
+    public void setMethodName(String aMethodName) {
+      methodName = aMethodName;
     }
 
     public FilterFieldType getFilterFieldType() {
-      if (metaData != null) {
-        return metaData.getType();
+      if (getMetaData() != null) {
+        return getMetaData().getType();
       }
       return null;
     }
@@ -281,6 +324,17 @@ public class FilterAssembler implements Serializable {
 
     public void setDate(Date date) {
       this.date = date;
+    }
+
+    protected FilterFieldMetaData getMetaData() {
+      if (metaData == null && methodName != null) {
+        metaData = getMetaDataByString(methodName);
+
+        if (metaData != null && metaData instanceof FilterChoiceFieldMetaData) {
+          filterOperand = FilterOperand.EQ;
+        }
+      }
+      return metaData;
     }
   }
 

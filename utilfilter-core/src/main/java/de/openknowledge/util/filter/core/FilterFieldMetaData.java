@@ -50,12 +50,11 @@ public class FilterFieldMetaData {
   }
 
   /**
-   *
+   * @deprecated Seems to be useless as it is only used by tests.
    * @param aFilterOperand
    * @param o
    * @return
    */
-  // TODO JavaDoc!
   public FilterExpression createFilterExpression(FilterOperand aFilterOperand, Object o) {
     switch (type) {
       case BIGDECIMAL:

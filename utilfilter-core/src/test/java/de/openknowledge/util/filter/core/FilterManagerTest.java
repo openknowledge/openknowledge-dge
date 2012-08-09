@@ -84,7 +84,8 @@ public class FilterManagerTest {
 
   @Test
   public void createFilterChoiceMetaData() throws Exception {
-    FilterManager fs = new FilterManager(FilteredChoiceTestLine.class, FilterTestManager.class);
+
+    FilterManager fs = new FilterManager(FilteredChoiceTestLine.class, Arrays.asList((Object)new FilterTestManager()));
     List<FilterFieldMetaData> list = fs.getFilterFieldMetaData();
     assertThat(list.size(), is(3));
     assertThat(list.get(0).getOrder(), is(100));
@@ -94,7 +95,7 @@ public class FilterManagerTest {
 
   @Test
   public void filterTest() {
-    FilterManager<List> fs = new FilterManager<List>(FilteredChoiceTestLine.class, FilterTestManager.class);
+    FilterManager<List> fs = new FilterManager<List>(FilteredChoiceTestLine.class, Arrays.asList((Object)new FilterTestManager()));
 
     List<FilterFieldMetaData> metaData = fs.getFilterFieldMetaData();
     fs.addExpression(metaData.get(0).createFilterExpression(FilterOperand.GT, new BigDecimal("1000")));

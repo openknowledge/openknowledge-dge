@@ -35,7 +35,8 @@ import java.util.Map;
 import static org.apache.commons.lang.Validate.notNull;
 
 /**
- * The <code>FilterManager</code> provides method/s to process the classes which contain {@link de.openknowledge.util.filter.core.annotation.FilterField} and {@link de.openknowledge.util.filter.core.annotation.FilterChoiceField}
+ * The <code>FilterManager</code> provides method/s to process the classes which contain {@link
+ * de.openknowledge.util.filter.core.annotation.FilterField} and {@link de.openknowledge.util.filter.core.annotation.FilterChoiceField}
  * annotations.
  *
  * @author Marc Petersen - open knowledge GmbH
@@ -43,7 +44,7 @@ import static org.apache.commons.lang.Validate.notNull;
 public class FilterManager<T extends Collection> {
 
   private List<FilterFieldMetaData> filterFieldMetaData;
-  private List<Class<?>> choiceManagers = new ArrayList<Class<?>>();
+  private List<Object> choiceHolders = new ArrayList<Object>();
   private Class<?> filterLine;
   private List<FilterExpression> expressions = new ArrayList<FilterExpression>();
 
@@ -62,18 +63,20 @@ public class FilterManager<T extends Collection> {
 
   /**
    * Allocates a <code>FilterManager</code> object and initializes it so that it is able to extract {@link FilterFieldMetaData} from the
-   * given <code>aFilterLine</code> class. It expects at least one class - <code>theChoiceManagers</code> - which contains {@link
-   * de.openknowledge.util.filter.core.annotation.FilterChoice} annotations as sources for {@linkplain de.openknowledge.util.filter.core.annotation.FilterChoiceField}s.
+   * given <code>aFilterLine</code> class. It expects at least one class - <code>theChoiceHolders</code> - which contains {@link
+   * de.openknowledge.util.filter.core.annotation.FilterChoice} annotations as sources for {@linkplain
+   * de.openknowledge.util.filter.core.annotation.FilterChoiceField}s.
    * <p/>
    * <i>Note</i>: Use <code>FilterManager(Class<?> aFilterLine)</code> if the <code>aFilterLine</code> class does not contain {@link
    * de.openknowledge.util.filter.core.annotation.FilterChoiceField} annotations
    *
-   * @param aFilterLine The class which contains {@link de.openknowledge.util.filter.core.annotation.FilterField} annotations.
-   * @param theChoiceManagers One or more classes to scan for {@link de.openknowledge.util.filter.core.annotation.FilterChoice} annotations.
+   * @param aFilterLine      The class which contains {@link de.openknowledge.util.filter.core.annotation.FilterField} annotations.
+   * @param theChoiceHolders One or more classes to scan for {@link de.openknowledge.util.filter.core.annotation.FilterChoice} annotations.
    */
-  public FilterManager(Class<?> aFilterLine, Class<?>... theChoiceManagers) {
+  public FilterManager(Class<?> aFilterLine, List<Object> theChoiceHolders) {
     this(aFilterLine);
-    choiceManagers = Arrays.asList(theChoiceManagers);
+    notNull(choiceHolders);
+    choiceHolders = theChoiceHolders;
   }
 
   /**
@@ -88,9 +91,9 @@ public class FilterManager<T extends Collection> {
   public T filter(T lines) {
     List<Object> removeList = new ArrayList<Object>();
 
-    for(Object line : lines) {
-      for(FilterExpression expression : expressions) {
-        if(!expression.matches(line)) {
+    for (Object line : lines) {
+      for (FilterExpression expression : expressions) {
+        if (!expression.matches(line)) {
           removeList.add(line);
           break;
         }
@@ -101,9 +104,21 @@ public class FilterManager<T extends Collection> {
     return lines;
   }
 
+  public Method getFilterFieldMethod(String methodName) {
+    notNull(methodName);
+
+    for (FilterFieldMetaData md : getFilterFieldMetaData()) {
+      if (md.getTargetMethod().getName().equals(methodName)) {
+        return md.getTargetMethod();
+      }
+    }
+
+    return null;
+  }
+
   /**
-   * Extracts the methods from the <code>choiceManagers</code> which are annotated with {@link de.openknowledge.util.filter.core.annotation.FilterChoice} and returns them as a map
-   * containing the annotated method as value and the annotation <code>sourceName</code> as key.
+   * Extracts the methods from the <code>choiceHolders</code> which are annotated with {@link de.openknowledge.util.filter.core.annotation.FilterChoice}
+   * and returns them as a map containing the annotated method as value and the annotation <code>sourceName</code> as key.
    *
    * @return The map of found choice methods.
    */
@@ -111,8 +126,8 @@ public class FilterManager<T extends Collection> {
     Map<String, Method> choiceMethods = new HashMap<String, Method>();
 
     List<Method> methods = new ArrayList<Method>();
-    for (Class<?> choiceClazz : choiceManagers) {
-      methods.addAll(Arrays.asList(choiceClazz.getMethods()));
+    for (Object choiceHolder : choiceHolders) {
+      methods.addAll(Arrays.asList(choiceHolder.getClass().getMethods()));
     }
 
     for (Method method : methods) {
@@ -126,26 +141,24 @@ public class FilterManager<T extends Collection> {
   }
 
   /**
-   * Assembles a list of {@link FilterFieldMetaData} based on {@link de.openknowledge.util.filter.core.annotation.FilterField} and {@link de.openknowledge.util.filter.core.annotation.FilterChoiceField} annotated methods.
+   * Assembles a list of {@link FilterFieldMetaData} based on {@link de.openknowledge.util.filter.core.annotation.FilterField} and {@link
+   * de.openknowledge.util.filter.core.annotation.FilterChoiceField} annotated methods.
    * <p/>
-   * Procedure of this method is as follows:
-   * <ol>
-   * <li>This method iterates over all methods within the given <code>filterLine</code> class.</li>
-   * <li>A new {@link FilterFieldMetaData} object is instantiated and added to the list if a method is annotated as {@link de.openknowledge.util.filter.core.annotation.FilterField}
-   * .</li>
-   * <li>A new {@link FilterChoiceFieldMetaData} object is instantiated and added to the list if a method is annotated as {@link
-   * de.openknowledge.util.filter.core.annotation.FilterChoiceField}.</li>
-   * <li>Finally the list is sorted and can be retrieved by calling {@link #getFilterFieldMetaData()}</li>
-   * </ol>
-   * @throws IllegalArgumentException if the return type of the {@link de.openknowledge.util.filter.core.annotation.FilterField} method is not supported.
-   * @throws IllegalArgumentException if no corresponding {@link FilterChoice} method is found for a {@link de.openknowledge.util.filter.core.annotation.FilterChoiceField}
-   * method.
+   * Procedure of this method is as follows: <ol> <li>This method iterates over all methods within the given <code>filterLine</code>
+   * class.</li> <li>A new {@link FilterFieldMetaData} object is instantiated and added to the list if a method is annotated as {@link
+   * de.openknowledge.util.filter.core.annotation.FilterField} .</li> <li>A new {@link FilterChoiceFieldMetaData} object is instantiated and
+   * added to the list if a method is annotated as {@link de.openknowledge.util.filter.core.annotation.FilterChoiceField}.</li> <li>Finally
+   * the list is sorted and can be retrieved by calling {@link #getFilterFieldMetaData()}</li> </ol>
+   *
+   * @throws IllegalArgumentException if the return type of the {@link de.openknowledge.util.filter.core.annotation.FilterField} method is
+   *                                  not supported.
+   * @throws IllegalArgumentException if no corresponding {@link FilterChoice} method is found for a {@link
+   *                                  de.openknowledge.util.filter.core.annotation.FilterChoiceField} method.
    */
   protected void extractMetaData() {
-    Map<String, Method> choiceMethods = extractChoiceMethods();
-    boolean hasChoices = !choiceMethods.isEmpty();
     Method[] methods = filterLine.getMethods();
     filterFieldMetaData = new ArrayList<FilterFieldMetaData>();
+    Map<String, Method> choiceMethods = extractChoiceMethods();
 
     for (Method method : methods) {
       FilterField annotation = method.getAnnotation(FilterField.class);
@@ -153,16 +166,17 @@ public class FilterManager<T extends Collection> {
         // TODO think about using method.getReturnType to replace FilterFieldType.
         if (BigDecimal.class.equals(method.getReturnType())) {
           filterFieldMetaData.add(
-                  new FilterFieldMetaData(FilterFieldType.BIGDECIMAL, method, annotation.order(), annotation.displayName()));
+                                  new FilterFieldMetaData(FilterFieldType.BIGDECIMAL,
+                                                          method, annotation.order(), annotation.displayName()));
         } else if (Date.class.equals(method.getReturnType())) {
           filterFieldMetaData.add(
-                  new FilterFieldMetaData(FilterFieldType.DATE, method, annotation.order(), annotation.displayName()));
+                                  new FilterFieldMetaData(FilterFieldType.DATE, method, annotation.order(), annotation.displayName()));
         } else {
           throw new IllegalArgumentException("Unsupported return type " + method.getReturnType());
         }
       }
 
-      if (hasChoices) {
+      if (!choiceMethods.isEmpty()) {
         FilterChoiceField choiceAnnotation = method.getAnnotation(FilterChoiceField.class);
         if (choiceAnnotation != null) {
           if (choiceMethods.containsKey(choiceAnnotation.sourceName())) {
@@ -181,13 +195,12 @@ public class FilterManager<T extends Collection> {
       @Override
       public int compare(FilterFieldMetaData o1, FilterFieldMetaData o2) {
         return o1.getOrder() > o2.getOrder() ? 1 : -1;
-
       }
     });
   }
 
   public List<FilterFieldMetaData> getFilterFieldMetaData() {
-    if(filterFieldMetaData == null) {
+    if (filterFieldMetaData == null) {
       extractMetaData();
     }
     return filterFieldMetaData;

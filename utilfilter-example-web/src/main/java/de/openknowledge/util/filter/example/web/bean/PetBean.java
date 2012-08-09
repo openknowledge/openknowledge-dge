@@ -16,7 +16,6 @@
 
 package de.openknowledge.util.filter.example.web.bean;
 
-import de.openknowledge.util.filter.core.FilterManager;
 import de.openknowledge.util.filter.core.web.FilterAssembler;
 import de.openknowledge.util.filter.example.web.domain.Pet;
 import de.openknowledge.util.filter.example.web.domain.Species;
@@ -53,7 +52,7 @@ public class PetBean implements Serializable {
 
   public FilterAssembler getFilterAssembler() {
     if(filterAssembler == null) {
-      filterAssembler = new FilterAssembler(new FilterManager<List>(Pet.class));
+      filterAssembler = new FilterAssembler<List>(Pet.class);
       filterAssembler.setFilterActive(true);
     }
     return filterAssembler;

@@ -19,7 +19,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:w="http://java.sun.com/jsf/composite/components"
+      xmlns:ok="http://java.sun.com/jsf/composite/components"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <f:view>
   <h:head>
@@ -76,7 +76,7 @@
       <div class="row">
         <div class="span12">
           <h:panelGroup id="filterPanel">
-            <w:filter update=":contentForm:petTable"
+            <ok:filter update=":contentForm:petTable"
                       filterAssembler="#{petBean.filterAssembler}"
                       applyFilterBean="#{petBean}"/>
           </h:panelGroup>
