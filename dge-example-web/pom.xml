@@ -20,20 +20,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
     <groupId>de.openknowledge.util</groupId>
-    <artifactId>utilfilter-parent</artifactId>
+    <artifactId>dge-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <relativePath>../utilfilter-parent/pom.xml</relativePath>
+    <relativePath>../dge-parent/pom.xml</relativePath>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.openknowledge.util</groupId>
-  <artifactId>utilfilter-example-web</artifactId>
-  <name>open knowledge Util Filter Example Web</name>
+  <artifactId>dge-example-web</artifactId>
+  <name>open knowledge - DataGrid Extensions - Example Web</name>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
   <build>
-    <finalName>ok-utilfilter</finalName>
+    <finalName>ok-dge</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -85,7 +85,7 @@
             </systemProperty>
           </systemProperties>
           <webAppConfig>
-            <contextPath>/utilfilter-example-web</contextPath>
+            <contextPath>/dge-example-web</contextPath>
             <tempDirectory>${project.build.directory}/work</tempDirectory>
             <defaultsDescriptor>${basedir}/src/test/conf/jetty/webdefault.xml</defaultsDescriptor>
             <serverClasses>
@@ -101,7 +101,7 @@
         <dependencies>
           <dependency>
                 <groupId>de.openknowledge.util</groupId>
-                <artifactId>utilfilter-core</artifactId>
+                <artifactId>dge-filter</artifactId>
                 <version>${project.version}</version>
                 <scope>compile</scope>
               </dependency>
@@ -294,7 +294,7 @@
             </goals>
             <configuration>
               <target>
-                <echo file="${project.build.directory}/classes/version.properties" message="utilfilter.version=${project.version}"/>
+                <echo file="${project.build.directory}/classes/version.properties" message="dge.version=${project.version}"/>
               </target>
             </configuration>
           </execution>
@@ -307,7 +307,7 @@
 
     <dependency>
       <groupId>de.openknowledge.util</groupId>
-      <artifactId>utilfilter-core</artifactId>
+      <artifactId>dge-filter</artifactId>
       <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>

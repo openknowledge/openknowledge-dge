@@ -18,11 +18,11 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-         id="ok-utilfilter"
+         id="ok-dge"
          version="3.0">
 
-  <description>open knowledge Util Filter Web</description>
-  <display-name>ok-utilfilter</display-name>
+  <description>open knowledge - DataGrid Extensions - Example Web</description>
+  <display-name>DataGrid Extensions</display-name>
 
   <context-param>
     <param-name>org.apache.myfaces.LOG_WEB_CONTEXT_PARAMS</param-name>

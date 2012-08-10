@@ -5,8 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>de.openknowledge.util</groupId>
-  <artifactId>openknowledge-util-filter</artifactId>
-  <name>open knowledge Util Filter</name>
+  <artifactId>openknowledge-dge</artifactId>
+  <name>open knowledge - DataGrid Extensions</name>
   <packaging>pom</packaging>
   <version>1.0.0-SNAPSHOT</version>
 
@@ -14,10 +14,10 @@
   <inceptionYear>2012</inceptionYear>
 
   <modules>
-    <module>utilfilter-build</module>
-    <module>utilfilter-parent</module>
-    <module>utilfilter-core</module>
-    <module>utilfilter-example-web</module>
+    <module>dge-build</module>
+    <module>dge-parent</module>
+    <module>dge-filter</module>
+    <module>dge-example-web</module>
   </modules>
 
 </project>

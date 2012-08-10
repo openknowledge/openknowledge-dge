@@ -62,8 +62,8 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.openknowledge.util</groupId>
-  <artifactId>utilfilter-parent</artifactId>
-  <name>open knowledge Util Filter Parent-POM</name>
+  <artifactId>dge-parent</artifactId>
+  <name>open knowledge - DataGrid Extensions - Parent-POM</name>
   <packaging>pom</packaging>
   <version>1.0.0-SNAPSHOT</version>
 
@@ -125,7 +125,7 @@
         <dependencies>
           <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>utilfilter-build</artifactId>
+            <artifactId>dge-build</artifactId>
             <version>${project.version}</version>
           </dependency>
         </dependencies>
@@ -137,7 +137,7 @@
         <configuration>
           <encoding>UTF-8</encoding>
           <configLocation>checkstyle/ok_checks.xml</configLocation>
-          <headerLocation>checkstyle/disclaimer-utilfilter.txt</headerLocation>
+          <headerLocation>checkstyle/disclaimer-dge.txt</headerLocation>
           <suppressionsLocation>checkstyle/suppressions.xml</suppressionsLocation>
           <failsOnError>true</failsOnError>
           <consoleOutput>true</consoleOutput>
@@ -146,7 +146,7 @@
         <dependencies>
           <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>utilfilter-build</artifactId>
+            <artifactId>dge-build</artifactId>
             <version>${project.version}</version>
           </dependency>
         </dependencies>
@@ -209,7 +209,7 @@
         <dependencies>
           <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>utilfilter-build</artifactId>
+            <artifactId>dge-build</artifactId>
             <version>${project.version}</version>
           </dependency>
         </dependencies>
@@ -248,7 +248,7 @@
               <configuration>
                 <encoding>UTF-8</encoding>
                 <configLocation>checkstyle/ok_checks.xml</configLocation>
-                <headerLocation>checkstyle/disclaimer-utilfilter.txt</headerLocation>
+                <headerLocation>checkstyle/disclaimer-dge.txt</headerLocation>
                 <suppressionsLocation>checkstyle/suppressions.xml</suppressionsLocation>
               </configuration>
             </plugin>
