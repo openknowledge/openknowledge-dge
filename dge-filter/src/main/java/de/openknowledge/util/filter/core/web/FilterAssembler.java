@@ -305,6 +305,11 @@ public class FilterAssembler<T extends Collection> implements Serializable {
 
     public void setMethodName(String aMethodName) {
       methodName = aMethodName;
+      selection = null;
+      date = null;
+      bigDecimal = null;
+      metaData = null;
+      filterOperand = null;
     }
 
     public FilterFieldType getFilterFieldType() {
