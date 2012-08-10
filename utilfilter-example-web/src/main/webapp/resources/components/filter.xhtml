@@ -36,15 +36,16 @@
 
   <style type="text/css">
     input[id$=-value_input] {
-      -moz-border-radius: 0 !important;
-      -webkit-border-radius: 0 !important;
-      border-radius: 0 !important;
-      -moz-box-shadow: none !important;
-      -webkit-box-shadow: none !important;
-      box-shadow: none !important;
-      padding: 0px !important;
-      font-weight: normal !important;
-      width: 150px !important;
+      -moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+      background-color: #FFFFFF;
+      border: 1px solid #CCCCCC;
+      border-radius: 3px 3px 3px 3px;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+      width: 150px;
+    }
+
+    .ui-corner-all {
+      border-radius: 4px 4px 4px 4px;
     }
   </style>
 
@@ -142,14 +143,16 @@
                       </h:panelGroup>
                     </h:panelGroup>
                   </td>
-                  <td style="width: 30%">
-                    <h:commandLink process="@this"
-                                   value=" - "
-                                   actionListener="#{cc.attrs.filterAssembler.removeFilterRow(row)}"/>
-                    <h:commandLink rendered="#{status.last}"
+                  <td style="width: 30%; padding-bottom: 4px;">
+                    <h:commandLink styleClass="btn" style="margin-right: 3px;" process="@this"
+                                   actionListener="#{cc.attrs.filterAssembler.removeFilterRow(row)}">
+                      <i class="icon-minus"></i>
+                    </h:commandLink>
+                    <h:commandLink styleClass="btn" rendered="#{status.last}"
                                    process="@none"
-                                   value=" + "
-                                   actionListener="#{cc.attrs.filterAssembler.addNewFilterRow}"/>
+                                   actionListener="#{cc.attrs.filterAssembler.addNewFilterRow}">
+                      <i class="icon-plus"></i>
+                    </h:commandLink>
 
                   </td>
                 </tr>
@@ -157,16 +160,18 @@
             </table>
         </td>
 
-        <td style="width: 18%; vertical-align: bottom;">
+        <td style="width: 18%; vertical-align: bottom; padding-bottom: 8px;">
           <div style="float: right;">
 
             <h:commandButton id="applyFilter"
+                             style="margin-right: 3px;"
                              update="filter #{cc.attrs.update}"
                              process="@none"
                              value="Apply"
+                             styleClass="btn btn-primary"
                              actionListener="#{cc.attrs.applyFilterBean.applyFilter}"/>
 
-            <h:commandButton styleClass="button_a"
+            <h:commandButton styleClass="btn"
                              update="filter #{cc.attrs.update}"
                              style="font-weight: normal;"
                              process="@none"
