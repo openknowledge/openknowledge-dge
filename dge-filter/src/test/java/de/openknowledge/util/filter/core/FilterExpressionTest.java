@@ -16,7 +16,11 @@
 
 package de.openknowledge.util.filter.core;
 
-import de.openknowledge.util.filter.core.annotation.FilterField;
+import de.openknowledge.util.dge.filter.FilterExpression;
+import de.openknowledge.util.dge.filter.FilterFieldMetaData;
+import de.openknowledge.util.dge.filter.FilterFieldType;
+import de.openknowledge.util.dge.filter.FilterOperand;
+import de.openknowledge.util.dge.filter.annotation.FilterField;
 import org.junit.Before;
 import org.junit.Test;
 

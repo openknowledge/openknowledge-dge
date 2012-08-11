@@ -16,6 +16,7 @@
 
 package de.openknowledge.util.filter.core;
 
+import de.openknowledge.util.dge.filter.FilterChoiceFieldMetaData;
 import org.junit.Test;
 import org.mockito.Mockito;
 

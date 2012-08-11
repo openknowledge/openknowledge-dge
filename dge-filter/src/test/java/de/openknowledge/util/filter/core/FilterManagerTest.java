@@ -16,9 +16,12 @@
 
 package de.openknowledge.util.filter.core;
 
-import de.openknowledge.util.filter.core.annotation.FilterChoice;
-import de.openknowledge.util.filter.core.annotation.FilterChoiceField;
-import de.openknowledge.util.filter.core.annotation.FilterField;
+import de.openknowledge.util.dge.filter.FilterFieldMetaData;
+import de.openknowledge.util.dge.filter.FilterManager;
+import de.openknowledge.util.dge.filter.FilterOperand;
+import de.openknowledge.util.dge.filter.annotation.FilterChoice;
+import de.openknowledge.util.dge.filter.annotation.FilterChoiceField;
+import de.openknowledge.util.dge.filter.annotation.FilterField;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
