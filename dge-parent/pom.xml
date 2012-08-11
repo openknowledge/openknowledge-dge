@@ -70,6 +70,27 @@
   <url>http://openknowledge.de</url>
   <inceptionYear>2012</inceptionYear>
 
+  <developers>
+    <developer>
+      <id>marc.petersen</id>
+      <name>Marc Petersen</name>
+      <email>marc.petersen@openknowledge.de</email>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <id>bartug.bölükemini</id>
+      <name>Bartug Bölükemini</name>
+      <email>bartug.boeluekemini@openknowledge.de</email>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <id>jens.schumann</id>
+      <name>Jens Schumann</name>
+      <email>jens.schumann@openknowledge.de</email>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
+
   <organization>
     <name>open knowledge GmbH</name>
   </organization>
@@ -81,6 +102,17 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/openknowledge/openknowledge-dge/issues</url>
+  </issueManagement>
+
+  <scm>
+    <url>https://github.com/openknowledge/openknowledge-dge.git</url>
+    <connection>scm:git:git://github.com/openknowledge/openknowledge-dge.git</connection>
+    <developerConnection>scm:git:git@github.com:openknowledge/openknowledge-dge.git</developerConnection>
+  </scm>
 
   <distributionManagement>
     <repository>
