@@ -34,8 +34,8 @@
     <module>dge-build</module>
     <module>dge-parent</module>
     <module>dge-filter</module>
-    <module>dge-samples</module>
     <module>dge-grouping</module>
+    <module>dge-samples</module>
   </modules>
 
 </project>
