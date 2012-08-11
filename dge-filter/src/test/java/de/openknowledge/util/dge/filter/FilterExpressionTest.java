@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.openknowledge.util.filter.core;
+package de.openknowledge.util.dge.filter;
 
 import de.openknowledge.util.dge.filter.FilterExpression;
 import de.openknowledge.util.dge.filter.FilterFieldMetaData;

@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 
-package de.openknowledge.util.filter.core;
+package de.openknowledge.util.dge.filter;
 
-import de.openknowledge.util.dge.filter.FilterFieldMetaData;
-import de.openknowledge.util.dge.filter.FilterManager;
-import de.openknowledge.util.dge.filter.FilterOperand;
 import de.openknowledge.util.dge.filter.annotation.FilterChoice;
 import de.openknowledge.util.dge.filter.annotation.FilterChoiceField;
 import de.openknowledge.util.dge.filter.annotation.FilterField;
