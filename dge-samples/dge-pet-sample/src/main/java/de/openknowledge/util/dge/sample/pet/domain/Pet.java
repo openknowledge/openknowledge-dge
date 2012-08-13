@@ -17,6 +17,7 @@
 package de.openknowledge.util.dge.sample.pet.domain;
 
 import de.openknowledge.util.dge.filter.annotation.FilterField;
+import de.openknowledge.util.dge.grouping.Group;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 import org.joda.time.Years;
@@ -44,6 +45,7 @@ public class Pet implements Serializable {
     name = aName;
   }
 
+  @Group(order = 200, displayName = "Age")
   @FilterField(order = 100, displayName = "Age")
   public BigDecimal getAge() {
     return new BigDecimal(Years.yearsBetween(new DateMidnight(getDateOfBirth()), new DateTime()).getYears());
@@ -58,6 +60,7 @@ public class Pet implements Serializable {
     dateOfBirth = aDateOfBirth;
   }
 
+  @Group(order = 100, displayName = "Species")
   public Species getSpecies() {
     return species;
   }

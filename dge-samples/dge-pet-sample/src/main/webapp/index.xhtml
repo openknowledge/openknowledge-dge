@@ -72,44 +72,69 @@
       </div>
 
       <h:form id="contentForm">
-      <!-- Pet example -->
-      <div class="row">
-        <div class="span12">
-          <h:panelGroup id="filterPanel">
-            <ok:filter update=":contentForm:petTable"
-                      id="okFilter"
-                      filterAssembler="#{petBean.filterAssembler}"
-                      applyFilterBean="#{petBean}"/>
-          </h:panelGroup>
-          <h:panelGroup layout="block" id="petTable">
-          <table class="table table-bordered">
-            <thead>
-            <tr>
-              <th class="headLine">Name</th>
-              <th class="headLine">Species</th>
-              <th class="headLine">Date of Birth</th>
-              <th class="headLine">Age</th>
-            </tr>
-            </thead>
-            <tbody>
-            <ui:repeat value="#{petBean.pets}" var="pet">
-              <tr>
-                <td>#{pet.name}</td>
-                <td>#{pet.species}</td>
-                <td style="text-align: right;">
-                  <h:outputText value="#{pet.dateOfBirth}">
-                    <f:convertDateTime dateStyle="long" timeZone="EST" type="date"/>
-                  </h:outputText>
-                </td>
-                <td style="text-align: right;">#{pet.age}</td>
-              </tr>
-            </ui:repeat>
-            </tbody>
-          </table>
-          </h:panelGroup>
-        </div>
+        <!-- Pet example -->
 
-      </div>
+        <!-- START grouping menu -->
+        <h:panelGroup>
+          <h:outputText value="Group by: "/>
+          <h:selectOneMenu style="width: 150px; background-color: #fff;"
+                           id="hedgeGrouping"
+                           immediate="true"
+                           value="#{petBean.selectedGroupingMetaData}">
+            <f:selectItem itemValue="#{null}"
+                          noSelectionOption="true"
+                          itemLabel="(No Selection)"/>
+            <f:selectItems value="#{petBean.groupingManager.groupingMetaData}"
+                           var="md" itemValue="#{md.displayName}"
+                           itemLabel="#{md.displayName}"/>
+            <f:ajax event="valueChange" execute="@form" render=":contentForm:petTable"/>
+          </h:selectOneMenu>
+        </h:panelGroup>
+        <!-- END grouping menu -->
+        <div class="row">
+          <div class="span12">
+            <h:panelGroup id="filterPanel">
+              <ok:filter update=":contentForm:petTable"
+                         id="okFilter"
+                         filterAssembler="#{petBean.filterAssembler}"
+                         applyFilterBean="#{petBean}"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" id="petTable">
+              <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th class="headLine">Name</th>
+                  <th class="headLine">Species</th>
+                  <th class="headLine">Date of Birth</th>
+                  <th class="headLine">Age</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ui:repeat value="#{petBean.groupingManager.groupedLines}" var="line">
+                  <tr>
+                    <td>
+                      <h:outputText value="#{line.object.name}" rendered="#{!line.aggregated}"/>
+                      <h:outputText value="#{line.displayName}" rendered="#{line.aggregated}" style="font-weight: bold; font-size: 1.2em;"/>
+                    </td>
+                    <td>
+                      <h:outputText value="#{line.object.species}" rendered="#{!line.aggregated}"/>
+                    </td>
+                    <td style="text-align: right;">
+                      <h:outputText value="#{line.object.dateOfBirth}" rendered="#{!line.aggregated}">
+                        <f:convertDateTime dateStyle="long" timeZone="EST" type="date"/>
+                      </h:outputText>
+                    </td>
+                    <td style="text-align: right;">
+                      <h:outputText value="#{line.object.age}" rendered="#{!line.aggregated}"/>
+                    </td>
+                  </tr>
+                </ui:repeat>
+                </tbody>
+              </table>
+            </h:panelGroup>
+          </div>
+
+        </div>
       </h:form>
 
       <hr/>

@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.apache.commons.lang.Validate.notNull;
+
 /**
  * @author Marc Petersen - open knowledge GmbH
  */
@@ -37,6 +39,13 @@ public class GroupingManager<E extends Serializable> implements Serializable {
   private transient List<GroupingMetaData> groupingMetaData;
   private transient List<Method> aggregationValueMethods;
 
+  /**
+   * Allocates a <code>GroupingManager</code> object and initializes it so that it can be used to group a list of objects based on their
+   * <code>@Group</code> and <code>@AggregationValue</code> annotations..
+   *
+   * @param aObjects A list of objects which should be grouped.
+   * @param aClazz   The class of the objects, which must contain the annotations.
+   */
   public GroupingManager(List<E> aObjects, Class<E> aClazz) {
     objects = aObjects;
     clazz = aClazz;
@@ -49,10 +58,14 @@ public class GroupingManager<E extends Serializable> implements Serializable {
         return groupBy(metaData);
       }
     }
-    throw new IllegalArgumentException("GroupingMetaData with displayName '" + groupDisplayName + "' not found.");
+
+    initGroupedLines();
+    return getGroupedLines();
   }
 
   public List<Line> groupBy(GroupingMetaData newGroupingMetaData) {
+    notNull(newGroupingMetaData);
+
     Map<String, AggregationLine> map = new HashMap<String, AggregationLine>();
 
     for (E object : objects) {
@@ -84,7 +97,7 @@ public class GroupingManager<E extends Serializable> implements Serializable {
       }
 
       AggregrationValue valueAnnotation = method.getAnnotation(AggregrationValue.class);
-      if(valueAnnotation != null) {
+      if (valueAnnotation != null) {
         aggregationValueMethods.add(method);
       }
     }
@@ -112,11 +125,11 @@ public class GroupingManager<E extends Serializable> implements Serializable {
   }
 
   public List<Line> getGroupedLines() {
-    List<Line> lines  = new ArrayList<Line>();
+    List<Line> lines = new ArrayList<Line>();
     for (Line line : groupedLines) {
       lines.add(line);
       if (line.isExpanded()) {
-        lines.addAll(((AggregationLine)line).getValueLines());
+        lines.addAll(((AggregationLine) line).getValueLines());
       }
     }
 

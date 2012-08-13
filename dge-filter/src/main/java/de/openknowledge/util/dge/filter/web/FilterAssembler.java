@@ -22,6 +22,10 @@ import de.openknowledge.util.dge.filter.FilterFieldMetaData;
 import de.openknowledge.util.dge.filter.FilterFieldType;
 import de.openknowledge.util.dge.filter.FilterManager;
 import de.openknowledge.util.dge.filter.FilterOperand;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -29,9 +33,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import static org.apache.commons.lang.Validate.notNull;
 
@@ -267,6 +268,7 @@ public class FilterAssembler<T extends Collection> implements Serializable {
     }
 
     public void setStringFilterOperand(String aFilterOperand) {
+
       if (StringUtils.isEmpty(aFilterOperand)) {
         aFilterOperand = "EQ";
       }

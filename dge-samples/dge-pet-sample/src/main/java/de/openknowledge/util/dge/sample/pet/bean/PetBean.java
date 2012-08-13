@@ -17,6 +17,9 @@
 package de.openknowledge.util.dge.sample.pet.bean;
 
 import de.openknowledge.util.dge.filter.web.FilterAssembler;
+import de.openknowledge.util.dge.grouping.AggregationLine;
+import de.openknowledge.util.dge.grouping.GroupingManager;
+import de.openknowledge.util.dge.grouping.Line;
 import de.openknowledge.util.dge.sample.pet.domain.Pet;
 import de.openknowledge.util.dge.sample.pet.domain.Species;
 import org.apache.commons.logging.Log;
@@ -41,21 +44,30 @@ public class PetBean implements Serializable {
 
   private List<Pet> pets;
   private FilterAssembler filterAssembler;
+  private GroupingManager<Pet> groupingManager;
+  private String selectedGroupingMetaData;
 
   protected PetBean() {
 
   }
 
-  public List<Pet> getPets() {
-    return (List<Pet>)getFilterAssembler().filter(new ArrayList(pets));
+  public List<Pet> getFilteredPets() {
+    return (List<Pet>) getFilterAssembler().filter(new ArrayList(pets));
   }
 
-  public void setPets(List<Pet> aPets) {
-    pets = aPets;
+  public void setSelectedGroupingMetaData(String aSelectedGroupingMetaData) {
+    selectedGroupingMetaData = aSelectedGroupingMetaData;
+    List<Line> lines = (List<Line>) getGroupingManager().groupBy(selectedGroupingMetaData);
+
+    for (Line line : lines) {
+      if (line instanceof AggregationLine) {
+        line.expand();
+      }
+    }
   }
 
   public FilterAssembler<List<Pet>> getFilterAssembler() {
-    if(filterAssembler == null) {
+    if (filterAssembler == null) {
       filterAssembler = new FilterAssembler<List<Pet>>(Pet.class);
       filterAssembler.setFilterActive(true);
     }
@@ -94,5 +106,16 @@ public class PetBean implements Serializable {
     p4.setSpecies(Species.CAT);
     p4.setDateOfBirth(new DateMidnight(2011, 4, 20).toDate());
     pets.add(p4);
+  }
+
+  public String getSelectedGroupingMetaData() {
+    return selectedGroupingMetaData;
+  }
+
+  public GroupingManager<Pet> getGroupingManager() {
+    if (groupingManager == null) {
+      groupingManager = new GroupingManager<Pet>(getFilteredPets(), Pet.class);
+    }
+    return groupingManager;
   }
 }
