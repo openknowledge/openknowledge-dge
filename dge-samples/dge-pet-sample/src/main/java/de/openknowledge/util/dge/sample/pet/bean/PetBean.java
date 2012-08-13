@@ -76,6 +76,8 @@ public class PetBean implements Serializable {
 
   public void applyFilter() {
     // doing nothing yet.
+    groupingManager = null;
+    selectedGroupingMetaData = null;
     LOG.info("applying filter");
   }
 

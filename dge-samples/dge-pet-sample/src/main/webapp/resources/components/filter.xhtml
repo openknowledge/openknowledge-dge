@@ -68,7 +68,7 @@
                                      value="#{cc.attrs.filterAssembler.filterFieldMetaData}"
                                      itemValue="#{metaData.targetMethod.name}"
                                      itemLabel="#{metaData.displayName}"/>
-                      <p:ajax event="valueChange" update="filterType filter-input" process="@this"/>
+                      <f:ajax event="valueChange" render="filterType filter-input" execute="@this"/>
                     </h:selectOneMenu>
 
                     <h:inputHidden id="filterType" value="#{row.filterFieldType}"/>
