@@ -106,6 +106,12 @@ public class PetBean implements Serializable {
     p4.setSpecies(Species.CAT);
     p4.setDateOfBirth(new DateMidnight(2011, 4, 20).toDate());
     pets.add(p4);
+
+    Pet p5 = new Pet();
+    p5.setName("Tweety");
+    p5.setSpecies(Species.BIRD);
+    p5.setDateOfBirth(new DateMidnight(2007, 7, 31).toDate());
+    pets.add(p5);
   }
 
   public String getSelectedGroupingMetaData() {
