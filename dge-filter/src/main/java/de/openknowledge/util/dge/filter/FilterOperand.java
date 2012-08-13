@@ -32,7 +32,7 @@ public enum FilterOperand {
   GT,
 
   /**
-   * Lower Than, normally represented by
+   * Lower Than, normally represented by <
    */
   LT,
 
