@@ -136,7 +136,7 @@
                                         itemLabel=""/>
                           <f:selectItems var="selection"
                                          value="#{row.choiceValues}"
-                                         itemValue="#{selection.toString}"
+                                         itemValue="#{selection.toString()}"
                                          itemLabel="#{selection}"/>
                           <p:ajax event="valueChange" process="@this"/>
                         </h:selectOneMenu>

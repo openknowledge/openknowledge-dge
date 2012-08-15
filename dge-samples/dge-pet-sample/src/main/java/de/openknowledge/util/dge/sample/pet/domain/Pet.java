@@ -16,15 +16,15 @@
 
 package de.openknowledge.util.dge.sample.pet.domain;
 
+import de.openknowledge.util.dge.filter.annotation.FilterChoiceField;
 import de.openknowledge.util.dge.filter.annotation.FilterField;
 import de.openknowledge.util.dge.grouping.Group;
-import org.joda.time.DateMidnight;
-import org.joda.time.DateTime;
-import org.joda.time.Years;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import org.joda.time.DateMidnight;
+import org.joda.time.DateTime;
+import org.joda.time.Years;
 
 /**
  * @author Marc Petersen - open knowledge GmbH
@@ -60,9 +60,10 @@ public class Pet implements Serializable {
     dateOfBirth = aDateOfBirth;
   }
 
+  @FilterChoiceField(order = 300, displayName = "Species", sourceName = "SPECIES")
   @Group(order = 100, displayName = "Species")
-  public Species getSpecies() {
-    return species;
+  public String getSpecies() {
+    return species.name();
   }
 
   public void setSpecies(Species aSpecies) {

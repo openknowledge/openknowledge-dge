@@ -21,6 +21,7 @@ import de.openknowledge.util.dge.grouping.AggregationLine;
 import de.openknowledge.util.dge.grouping.GroupingManager;
 import de.openknowledge.util.dge.grouping.Line;
 import de.openknowledge.util.dge.sample.pet.domain.Pet;
+import de.openknowledge.util.dge.sample.pet.domain.PetLineChoices;
 import de.openknowledge.util.dge.sample.pet.domain.Species;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -68,7 +69,7 @@ public class PetBean implements Serializable {
 
   public FilterAssembler<List<Pet>> getFilterAssembler() {
     if (filterAssembler == null) {
-      filterAssembler = new FilterAssembler<List<Pet>>(Pet.class);
+      filterAssembler = new FilterAssembler<List<Pet>>(Pet.class, PetLineChoices.class, new PetLineChoices());
       filterAssembler.setFilterActive(true);
     }
     return filterAssembler;
