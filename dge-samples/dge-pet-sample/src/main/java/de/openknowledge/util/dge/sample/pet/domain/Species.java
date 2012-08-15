@@ -21,9 +21,22 @@ package de.openknowledge.util.dge.sample.pet.domain;
  */
 public enum Species {
 
-  CAT,
-  DOG,
-  BIRD,
-  RABBIT
+  CAT("Cat"),
+  DOG("Dog"),
+  BIRD("Bird"),
+  RABBIT("Rabbit");
 
+  private String name;
+
+  Species(String aName) {
+    name = aName;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public String toString() {
+    return name;
+  }
 }

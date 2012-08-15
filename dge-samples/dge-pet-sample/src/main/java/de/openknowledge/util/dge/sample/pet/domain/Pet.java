@@ -62,8 +62,8 @@ public class Pet implements Serializable {
 
   @FilterChoiceField(order = 300, displayName = "Species", sourceName = "SPECIES")
   @Group(order = 100, displayName = "Species")
-  public String getSpecies() {
-    return species.name();
+  public Species getSpecies() {
+    return species;
   }
 
   public void setSpecies(Species aSpecies) {

@@ -26,22 +26,22 @@ import java.util.Set;
  */
 public class PetLineChoices implements Serializable {
 
-  private Set<String> species;
+  private Set<Species> species;
 
     public PetLineChoices() {
       init();
     }
 
     public void init() {
-      species = new HashSet<String>();
-      species.add("Cat");
-      species.add("Dog");
-      species.add("Bird");
-      species.add("Rabbit");
+      species = new HashSet<Species>();
+
+      for (Species currentSpecies: Species.values()) {
+        species.add(currentSpecies);
+      }
     }
 
     @FilterChoice("SPECIES")
-    public Set<String> getSpecies() {
+    public Set<Species> getSpecies() {
       return species;
     }
 
