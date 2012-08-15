@@ -85,7 +85,7 @@
             </systemProperty>
           </systemProperties>
           <webAppConfig>
-            <contextPath>/dge-example-web</contextPath>
+            <contextPath>/dge-pet02-sample</contextPath>
             <tempDirectory>${project.build.directory}/work</tempDirectory>
             <defaultsDescriptor>${basedir}/src/test/conf/jetty/webdefault.xml</defaultsDescriptor>
             <serverClasses>
