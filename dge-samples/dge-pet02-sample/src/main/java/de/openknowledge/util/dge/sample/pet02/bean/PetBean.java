@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package de.openknowledge.util.dge.sample.pet.bean;
+package de.openknowledge.util.dge.sample.pet02.bean;
 
 import de.openknowledge.util.dge.filter.web.FilterAssembler;
 import de.openknowledge.util.dge.grouping.AggregationLine;
 import de.openknowledge.util.dge.grouping.GroupingManager;
 import de.openknowledge.util.dge.grouping.Line;
-import de.openknowledge.util.dge.sample.pet.domain.Pet;
-import de.openknowledge.util.dge.sample.pet.domain.PetLineChoices;
-import de.openknowledge.util.dge.sample.pet.domain.Species;
+import de.openknowledge.util.dge.sample.pet02.domain.Pet;
+import de.openknowledge.util.dge.sample.pet02.domain.PetLineChoices;
+import de.openknowledge.util.dge.sample.pet02.domain.Species;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.joda.time.DateMidnight;
@@ -127,4 +127,6 @@ public class PetBean implements Serializable {
     }
     return groupingManager;
   }
+
+
 }

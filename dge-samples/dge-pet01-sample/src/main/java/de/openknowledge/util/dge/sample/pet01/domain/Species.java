@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.openknowledge.util.dge.sample.pet.domain;
+package de.openknowledge.util.dge.sample.pet01.domain;
 
 /**
  * @author Marc Petersen - open knowledge GmbH

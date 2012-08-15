@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package de.openknowledge.util.dge.sample.pet.domain;
+package de.openknowledge.util.dge.sample.pet02.domain;
 
 import de.openknowledge.util.dge.filter.annotation.FilterChoiceField;
 import de.openknowledge.util.dge.filter.annotation.FilterField;
 import de.openknowledge.util.dge.grouping.Group;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 import org.joda.time.Years;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @author Marc Petersen - open knowledge GmbH

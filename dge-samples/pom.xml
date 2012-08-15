@@ -21,7 +21,8 @@
   <inceptionYear>2012</inceptionYear>
 
   <modules>
-    <module>dge-pet-sample</module>
+    <module>dge-pet01-sample</module>
+    <module>dge-pet02-sample</module>
   </modules>
 
 </project>

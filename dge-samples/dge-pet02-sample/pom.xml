@@ -27,8 +27,8 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.openknowledge.util</groupId>
-  <artifactId>dge-pet-sample</artifactId>
-  <name>open knowledge - DataGrid Extensions - Pet Sample</name>
+  <artifactId>dge-pet02-sample</artifactId>
+  <name>open knowledge - DataGrid Extensions - Pet 02 Sample</name>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
