@@ -33,7 +33,7 @@
   <packaging>war</packaging>
 
   <build>
-    <finalName>ok-dge</finalName>
+    <finalName>dge-pet01-sample</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -284,6 +284,148 @@
           </dependency>
 
         </dependencies>
+      </plugin>
+
+      <plugin>
+        <groupId>com.googlecode.t7mp</groupId>
+        <artifactId>maven-t7-plugin</artifactId>
+        <version>0.9.10.M1</version>
+        <configuration>
+          <systemProperties>
+            <java.awt.headless>true</java.awt.headless>
+            <log4j.configuration>file:${basedir}/src/test/resources/test-log4j.xml</log4j.configuration>
+          </systemProperties>
+          <!--<tomcatConfigDirectory>${basedir}/src/test/conf/tomcat</tomcatConfigDirectory>-->
+          <libs>
+
+            <jarArtifact>
+              <groupId>org.apache.openwebbeans</groupId>
+              <artifactId>openwebbeans-impl</artifactId>
+              <version>${version.owb}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>org.apache.openwebbeans</groupId>
+              <artifactId>openwebbeans-spi</artifactId>
+              <version>${version.owb}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>org.apache.openwebbeans</groupId>
+              <artifactId>openwebbeans-jsf</artifactId>
+              <version>${version.owb}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>org.apache.openwebbeans</groupId>
+              <artifactId>openwebbeans-resource</artifactId>
+              <version>${version.owb}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>org.apache.openwebbeans</groupId>
+              <artifactId>openwebbeans-web</artifactId>
+              <version>${version.owb}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>org.apache.openwebbeans</groupId>
+              <artifactId>openwebbeans-tomcat7</artifactId>
+              <version>${version.owb}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>net.sf.scannotation</groupId>
+              <artifactId>scannotation</artifactId>
+              <version>${version.owb.scannotation}</version>
+            </jarArtifact>
+
+            <jarArtifact>
+              <groupId>org.apache.geronimo.specs</groupId>
+              <artifactId>geronimo-interceptor_1.1_spec</artifactId>
+              <version>${version.geronimo.specs}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>org.apache.geronimo.specs</groupId>
+              <artifactId>geronimo-jcdi_1.0_spec</artifactId>
+              <version>${version.geronimo.specs}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>org.apache.geronimo.specs</groupId>
+              <artifactId>geronimo-atinject_1.0_spec</artifactId>
+              <version>${version.geronimo.specs}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>org.apache.geronimo.specs</groupId>
+              <artifactId>geronimo-ejb_3.1_spec</artifactId>
+              <version>${version.geronimo.specs}</version>
+            </jarArtifact>
+
+            <jarArtifact>
+              <groupId>org.hibernate.common</groupId>
+              <artifactId>hibernate-commons-annotations</artifactId>
+              <version>${version.hibernate.hibernate-annotations}</version>
+            </jarArtifact>
+
+            <jarArtifact>
+              <groupId>org.apache.myfaces.core</groupId>
+              <artifactId>myfaces-api</artifactId>
+              <version>${version.myfaces}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>org.apache.myfaces.core</groupId>
+              <artifactId>myfaces-impl</artifactId>
+              <version>${version.myfaces}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>javax.validation</groupId>
+              <artifactId>validation-api</artifactId>
+              <version>${version.validation.api}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>javax.servlet</groupId>
+              <artifactId>jstl</artifactId>
+              <version>1.2</version>
+            </jarArtifact>
+
+            <jarArtifact>
+              <groupId>commons-digester</groupId>
+              <artifactId>commons-digester</artifactId>
+              <version>${version.commons.digester}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>commons-collections</groupId>
+              <artifactId>commons-collections</artifactId>
+              <version>${version.commons.collections}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>commons-codec</groupId>
+              <artifactId>commons-codec</artifactId>
+              <version>${version.commons.codec}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>commons-beanutils</groupId>
+              <artifactId>commons-beanutils</artifactId>
+              <version>${version.commons.beanutils}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>commons-logging</groupId>
+              <artifactId>commons-logging</artifactId>
+              <version>${version.commons.logging}</version>
+            </jarArtifact>
+
+            <jarArtifact>
+              <groupId>log4j</groupId>
+              <artifactId>log4j</artifactId>
+              <version>${version.log4j}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>org.slf4j</groupId>
+              <artifactId>slf4j-api</artifactId>
+              <version>${version.slf4j}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>org.slf4j</groupId>
+              <artifactId>slf4j-log4j12</artifactId>
+              <version>${version.slf4j}</version>
+            </jarArtifact>
+
+          </libs>
+        </configuration>
       </plugin>
 
       <!-- dump current version to version.properties -->

@@ -48,6 +48,9 @@ public class PetBean implements Serializable {
   }
 
   public List<Pet> getFilteredPets() {
+    if (pets == null) {
+      init();
+    }
     return (List<Pet>) getFilterAssembler().filter(new ArrayList(pets));
   }
 
@@ -66,6 +69,7 @@ public class PetBean implements Serializable {
 
   @PostConstruct
   public void init() {
+    LOG.info("Creating pets...");
     pets = new ArrayList<Pet>();
 
     Pet p1 = new Pet();
@@ -97,6 +101,7 @@ public class PetBean implements Serializable {
     p5.setSpecies(Species.BIRD);
     p5.setDateOfBirth(new DateMidnight(2007, 7, 31).toDate());
     pets.add(p5);
+    LOG.info(pets.size() + " pets have been created.");
   }
 
 }
