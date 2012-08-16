@@ -295,7 +295,7 @@
             <java.awt.headless>true</java.awt.headless>
             <log4j.configuration>file:${basedir}/src/test/resources/test-log4j.xml</log4j.configuration>
           </systemProperties>
-          <!--<tomcatConfigDirectory>${basedir}/src/test/conf/tomcat</tomcatConfigDirectory>-->
+          <tomcatConfigDirectory>${basedir}/src/test/conf/tomcat</tomcatConfigDirectory>
           <libs>
 
             <jarArtifact>
@@ -539,38 +539,50 @@
       <groupId>org.codehaus.btm</groupId>
       <artifactId>btm</artifactId>
       <version>${version.btm}</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>org.apache.openwebbeans</groupId>
       <artifactId>openwebbeans-jsf</artifactId>
       <version>${version.owb}</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.openwebbeans</groupId>
       <artifactId>openwebbeans-impl</artifactId>
       <version>${version.owb}</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.openwebbeans</groupId>
       <artifactId>openwebbeans-web</artifactId>
       <version>${version.owb}</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.openwebbeans</groupId>
       <artifactId>openwebbeans-spi</artifactId>
       <version>${version.owb}</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.openwebbeans</groupId>
       <artifactId>openwebbeans-resource</artifactId>
       <version>${version.owb}</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.openwebbeans</groupId>
+      <artifactId>openwebbeans-tomcat7</artifactId>
+      <version>${version.owb}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.scannotation</groupId>
+      <artifactId>scannotation</artifactId>
+      <version>${version.owb.scannotation}</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- The contents of this file will be loaded for each web application -->
+<Context>
+
+  <!-- Default set of monitored resources -->
+  <WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+  <!--
+  <Transaction factory="bitronix.tm.BitronixUserTransactionObjectFactory"/>
+
+  <Resource name="jdbc/waveDS" auth="Container" type="javax.sql.DataSource"
+            factory="bitronix.tm.resource.ResourceObjectFactory" uniqueName="jdbc/waveDS"/>
+
+
+  <Resource name="UserTransaction" auth="Container" type="javax.transaction.UserTransaction"
+            factory="bitronix.tm.BitronixUserTransactionObjectFactory"/>
+  -->
+
+</Context>

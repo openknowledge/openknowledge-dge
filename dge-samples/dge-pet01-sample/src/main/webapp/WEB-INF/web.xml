@@ -29,6 +29,7 @@
     <param-value>de.openknowledge.util.dge</param-value>
   </context-param>
 
+  <!--
   <context-param>
     <param-name>org.apache.myfaces.config.annotation.LifecycleProvider</param-name>
     <param-value>org.apache.myfaces.config.annotation.Tomcat7AnnotationLifecycleProvider</param-value>
@@ -37,7 +38,7 @@
   <context-param>
     <param-name>com.sun.faces.injectionProvider</param-name>
     <param-value>com.sun.faces.vendor.WebContainerInjectionProvider</param-value>
-  </context-param>
+  </context-param>-->
 
   <context-param>
     <param-name>org.apache.myfaces.LOG_WEB_CONTEXT_PARAMS</param-name>
