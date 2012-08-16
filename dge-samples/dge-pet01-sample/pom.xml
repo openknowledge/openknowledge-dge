@@ -169,6 +169,12 @@
             <scope>compile</scope>
           </dependency>
           <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${version.commons.lang}</version>
+            <scope>compile</scope>
+          </dependency>
+          <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>${version.commons.collections}</version>
@@ -336,6 +342,12 @@
 
             <jarArtifact>
               <groupId>org.apache.geronimo.specs</groupId>
+              <artifactId>geronimo-servlet_3.0_spec</artifactId>
+              <version>${version.geronimo.specs}</version>
+            </jarArtifact>
+
+            <jarArtifact>
+              <groupId>org.apache.geronimo.specs</groupId>
               <artifactId>geronimo-interceptor_1.1_spec</artifactId>
               <version>${version.geronimo.specs}</version>
             </jarArtifact>
@@ -383,6 +395,23 @@
             </jarArtifact>
 
             <jarArtifact>
+              <groupId>de.odysseus.juel</groupId>
+              <artifactId>juel-impl</artifactId>
+              <version>${version.juel}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>de.odysseus.juel</groupId>
+              <artifactId>juel-spi</artifactId>
+              <version>${version.juel}</version>
+            </jarArtifact>
+
+            <jarArtifact>
+              <groupId>org.javassist</groupId>
+              <artifactId>javassist</artifactId>
+              <version>${version.hibernate.javassist}</version>
+            </jarArtifact>
+
+            <jarArtifact>
               <groupId>commons-digester</groupId>
               <artifactId>commons-digester</artifactId>
               <version>${version.commons.digester}</version>
@@ -403,9 +432,19 @@
               <version>${version.commons.beanutils}</version>
             </jarArtifact>
             <jarArtifact>
+              <groupId>commons-lang</groupId>
+              <artifactId>commons-lang</artifactId>
+              <version>${version.commons.lang}</version>
+            </jarArtifact>
+            <jarArtifact>
               <groupId>commons-logging</groupId>
               <artifactId>commons-logging</artifactId>
               <version>${version.commons.logging}</version>
+            </jarArtifact>
+            <jarArtifact>
+              <groupId>org.apache.commons</groupId>
+              <artifactId>commons-io</artifactId>
+              <version>${version.commons.io}</version>
             </jarArtifact>
 
             <jarArtifact>
@@ -422,6 +461,12 @@
               <groupId>org.slf4j</groupId>
               <artifactId>slf4j-log4j12</artifactId>
               <version>${version.slf4j}</version>
+            </jarArtifact>
+
+            <jarArtifact>
+              <groupId>org.apache.openejb</groupId>
+              <artifactId>javaee-api</artifactId>
+              <version>${version.javaee.api}</version>
             </jarArtifact>
 
           </libs>
@@ -469,24 +514,26 @@
     <dependency>
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-ejb_3.1_spec</artifactId>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-jcdi_1.0_spec</artifactId>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-atinject_1.0_spec</artifactId>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>org.primefaces</groupId>
       <artifactId>primefaces</artifactId>
       <version>${version.primefaces}</version>
+      <scope>compile</scope>
     </dependency>
+
     <dependency>
       <groupId>de.odysseus.juel</groupId>
       <artifactId>juel-api</artifactId>
@@ -494,23 +541,33 @@
     <dependency>
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-servlet_3.0_spec</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-io</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections</artifactId>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
@@ -522,10 +579,12 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-all</artifactId>
+      <scope>test</scope>
     </dependency>
 
     <dependency>
@@ -588,40 +647,38 @@
     <dependency>
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-interceptor_1.1_spec</artifactId>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
-
 
     <dependency>
       <groupId>de.odysseus.juel</groupId>
       <artifactId>juel-impl</artifactId>
       <version>${version.juel}</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>de.odysseus.juel</groupId>
       <artifactId>juel-spi</artifactId>
       <version>${version.juel}</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
-
 
     <dependency>
       <groupId>org.apache.myfaces.core</groupId>
       <artifactId>myfaces-api</artifactId>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.myfaces.core</groupId>
       <artifactId>myfaces-impl</artifactId>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>${version.log4j}</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
