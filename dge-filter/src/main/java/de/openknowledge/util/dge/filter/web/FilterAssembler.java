@@ -186,6 +186,14 @@ public class FilterAssembler<T extends Collection> implements Serializable {
     }
   }
 
+  public void activateFilter() {
+    setFilterActive(true);
+  }
+
+  public void deactivateFilter() {
+    setFilterActive(false);
+  }
+
   public class FilterRow implements Serializable {
 
     private String methodName;
