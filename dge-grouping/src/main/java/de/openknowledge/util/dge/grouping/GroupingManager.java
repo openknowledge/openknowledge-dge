@@ -38,6 +38,7 @@ public class GroupingManager<E extends Serializable> implements Serializable {
   private String currentGroupingMetaData;
   private transient List<GroupingMetaData> groupingMetaData;
   private transient List<Method> aggregationValueMethods;
+  private boolean expandByDefault = false;
 
   /**
    * Allocates a <code>GroupingManager</code> object and initializes it so that it can be used to group a list of objects based on their
@@ -119,6 +120,7 @@ public class GroupingManager<E extends Serializable> implements Serializable {
 
   protected Map putOrAddValueLine(Map map, Object key, ValueLine<E> currentLine) {
     AggregationLine line = map.containsKey(key) ? (AggregationLine) map.get(key) : new AggregationLine(key.toString());
+    line.setExpanded(expandByDefault);
     line.addValueLine(currentLine, getAggregationValueMethods());
     map.put(key, line);
     return map;
@@ -158,4 +160,11 @@ public class GroupingManager<E extends Serializable> implements Serializable {
     return aggregationValueMethods;
   }
 
+  public boolean isExpandByDefault() {
+    return expandByDefault;
+  }
+
+  public void setExpandByDefault(boolean aExpandByDefault) {
+    expandByDefault = aExpandByDefault;
+  }
 }
