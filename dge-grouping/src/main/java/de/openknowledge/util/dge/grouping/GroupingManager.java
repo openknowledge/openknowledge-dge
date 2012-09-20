@@ -32,6 +32,8 @@ import static org.apache.commons.lang.Validate.notNull;
  */
 public class GroupingManager<E extends Serializable> implements Serializable {
 
+  private static final long serialVersionUID = 7993640591098381021L;
+
   private List<E> objects;
   private List<Line> groupedLines;
   private Class<E> clazz;

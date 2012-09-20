@@ -43,6 +43,7 @@ import static org.apache.commons.lang.Validate.notNull;
  */
 public class FilterAssembler<T extends Collection> implements Serializable {
 
+  private static final long serialVersionUID = -4108166213555175328L;
   private static final Log LOG = LogFactory.getLog(FilterAssembler.class);
 
   private boolean filterActive = false;
@@ -126,7 +127,7 @@ public class FilterAssembler<T extends Collection> implements Serializable {
   // TODO Should this method throw an IllegalArgumentException instead of returning null?
   protected FilterFieldMetaData getMetaDataByString(String methodName) {
     notNull(methodName, "The methodName should not be null");
-    LOG.info("Searching for method with name '" + methodName +"'");
+    LOG.info("Searching for method with name '" + methodName + "'");
 
     for (FilterFieldMetaData data : getFilterFieldMetaData()) {
       if (data.getTargetMethod().getName().equals(methodName)) {
@@ -135,7 +136,7 @@ public class FilterAssembler<T extends Collection> implements Serializable {
       }
     }
 
-    LOG.info("No method was found for name '" + methodName +"'");
+    LOG.info("No method was found for name '" + methodName + "'");
     return null;
   }
 
@@ -214,6 +215,8 @@ public class FilterAssembler<T extends Collection> implements Serializable {
 
   public class FilterRow implements Serializable {
 
+    private static final long serialVersionUID = -9079360861380466493L;
+
     private String methodName;
     private transient FilterFieldMetaData metaData;
     private FilterOperand filterOperand;
@@ -260,11 +263,7 @@ public class FilterAssembler<T extends Collection> implements Serializable {
         return false;
       }
 
-      if (getValue() == null) {
-        return false;
-      }
-
-      return true;
+      return getValue() != null;
     }
 
     public Collection getChoiceValues() {
@@ -356,11 +355,11 @@ public class FilterAssembler<T extends Collection> implements Serializable {
     }
 
     public Date getDate() {
-      return date;
+      return new Date(date.getTime());
     }
 
-    public void setDate(Date date) {
-      this.date = date;
+    public void setDate(final Date aDate) {
+      date = aDate;
     }
 
     protected FilterFieldMetaData getMetaData() {
