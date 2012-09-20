@@ -97,6 +97,7 @@ public class FilterAssembler<T extends Collection> implements Serializable {
    * @return
    */
   // TODO JavaDoc!
+  // TODO Test me!
   public Collection filter(Collection collection) {
     getFilterManager().resetExpressions();
 
@@ -115,18 +116,26 @@ public class FilterAssembler<T extends Collection> implements Serializable {
   }
 
   /**
-   * @param methodName
-   * @return
+   * Looks up and assembles the {@link FilterFieldMetaData} for a given method name.
+   * The given methodName needs to match the exact name of the method, e.g. <code>getFoo</code>.
+   *
+   * @param methodName The method name to get the meta data for.
+   * @return The found meta data or null if no method has been found.
    */
-  // TODO JavaDoc!
+  // TODO Change lookup method to expect the property name not the method name, e.g. 'foo' instead of 'getFoo'.
+  // TODO Should this method throw an IllegalArgumentException instead of returning null?
   protected FilterFieldMetaData getMetaDataByString(String methodName) {
-    notNull(methodName);
+    notNull(methodName, "The methodName should not be null");
+    LOG.info("Searching for method with name '" + methodName +"'");
 
     for (FilterFieldMetaData data : getFilterFieldMetaData()) {
       if (data.getTargetMethod().getName().equals(methodName)) {
+        LOG.info("Method found for name '" + methodName +"'");
         return data;
       }
     }
+
+    LOG.info("No method was found for name '" + methodName +"'");
     return null;
   }
 
@@ -142,6 +151,12 @@ public class FilterAssembler<T extends Collection> implements Serializable {
     return possibleOperands;
   }
 
+  /**
+   * Removes the given FilterRow from the list of rows.
+   * If the list is empty after removing the row, a new row will be added.
+   *
+   * @param row The FilterRow to remove from the list of rows.
+   */
   public void removeFilterRow(FilterRow row) {
     filterRows.remove(row);
     if (filterRows.isEmpty()) {
@@ -149,6 +164,9 @@ public class FilterAssembler<T extends Collection> implements Serializable {
     }
   }
 
+  /**
+   * Adds an empty {@link FilterRow} to the list.
+   */
   public void addNewFilterRow() {
     filterRows.add(new FilterRow());
   }

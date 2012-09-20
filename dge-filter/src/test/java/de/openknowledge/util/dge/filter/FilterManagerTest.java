@@ -17,8 +17,6 @@
 package de.openknowledge.util.dge.filter;
 
 import de.openknowledge.util.dge.filter.annotation.FilterChoice;
-import de.openknowledge.util.dge.filter.annotation.FilterChoiceField;
-import de.openknowledge.util.dge.filter.annotation.FilterField;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
@@ -28,7 +26,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -107,56 +104,6 @@ public class FilterManagerTest {
     filteredLines = fs.filter(lines);
     assertThat(filteredLines.size(), is(1));
     assertThat(filteredLines.get(0).getYadda(), is("MPE"));
-  }
-
-
-  public class FilteredTestLine {
-
-    private BigDecimal foo;
-    private Date bar;
-
-    public FilteredTestLine(BigDecimal aFoo, Date aBar) {
-      foo = aFoo;
-      bar = aBar;
-    }
-
-    @FilterField(order = 200, displayName = "Bar")
-    public Date getBar() {
-      return bar;
-    }
-
-    @FilterField(order = 100, displayName = "Foo")
-    public BigDecimal getFoo() {
-      return foo;
-    }
-  }
-
-  public class FilteredChoiceTestLine {
-
-    private BigDecimal foo;
-    private Date bar;
-    private String yadda;
-
-    public FilteredChoiceTestLine(BigDecimal aFoo, Date aBar, String aYadda) {
-      foo = aFoo;
-      bar = aBar;
-      yadda = aYadda;
-    }
-
-    @FilterField(order = 200, displayName = "Bar")
-    public Date getBar() {
-      return bar;
-    }
-
-    @FilterField(order = 100, displayName = "Foo")
-    public BigDecimal getFoo() {
-      return foo;
-    }
-
-    @FilterChoiceField(order = 300, displayName = "Yadda", sourceName = "YADDAS")
-    public String getYadda() {
-      return yadda;
-    }
   }
 
   public class FilterTestManager {
