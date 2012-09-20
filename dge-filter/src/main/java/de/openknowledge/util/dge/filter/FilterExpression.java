@@ -22,7 +22,6 @@ package de.openknowledge.util.dge.filter;
  *
  * @author Marc Petersen - open knowledge GmbH
  */
-// TODO JavaDoc!
 public class FilterExpression<T extends Comparable> {
 
   private FilterFieldMetaData metaData;
@@ -43,11 +42,12 @@ public class FilterExpression<T extends Comparable> {
   }
 
   /**
+   * Compares the selected filter value with the value from a given (target)object.
+   * If the given value matches with the filter value, the object should stay in the result list of filtered objects.
    *
-   * @param targetObject
-   * @return
+   * @param targetObject The object to compare with the filter value.
+   * @return true if the value matches, false if not.
    */
-  // TODO JavaDoc!
   public boolean matches(Object targetObject) {
     T currentValue = (T)metaData.getValue(targetObject);
     // TODO check classcastexception
