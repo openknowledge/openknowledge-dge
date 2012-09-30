@@ -58,8 +58,8 @@ public class FilterAssembler<T extends Collection> implements Serializable {
   /**
    * Allocates a <code>FilterAssembler</code> object.
    * <p/>
-   * <i>Note:</i> Use <code>FilterAssembler(Class<?> aFilterLine, Class<?>... theChoiceManagers)</code> if <code>aFilterLine</code> contains
-   * {@link de.openknowledge.util.dge.filter.annotation.FilterChoiceField} annotations.
+   * <i>Note:</i> Use <code>FilterAssembler(Class<?> aFilterLine, Class<?>... theChoiceManagers)</code> if <code>aFilterLine</code>
+   * contains {@link de.openknowledge.util.dge.filter.annotation.FilterChoiceField} annotations.
    *
    * @param aFilterLine The class which contains {@link de.openknowledge.util.dge.filter.annotation.FilterField} annotations.
    */
@@ -131,7 +131,7 @@ public class FilterAssembler<T extends Collection> implements Serializable {
 
     for (FilterFieldMetaData data : getFilterFieldMetaData()) {
       if (data.getTargetMethod().getName().equals(methodName)) {
-        LOG.info("Method found for name '" + methodName +"'");
+        LOG.info("Method found for name '" + methodName + "'");
         return data;
       }
     }
@@ -355,7 +355,10 @@ public class FilterAssembler<T extends Collection> implements Serializable {
     }
 
     public Date getDate() {
-      return new Date(date.getTime());
+      if (date != null) {
+        return new Date(date.getTime());
+      }
+      return null;
     }
 
     public void setDate(final Date aDate) {
