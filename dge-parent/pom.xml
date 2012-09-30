@@ -15,7 +15,9 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -67,7 +69,7 @@
   <artifactId>dge-parent</artifactId>
   <name>open knowledge - DataGrid Extensions - Parent-POM</name>
   <packaging>pom</packaging>
-  <version>1.0.0</version>
+  <version>1.0.0-SNAPSHOT</version>
 
   <url>http://openknowledge.de</url>
   <inceptionYear>2012</inceptionYear>
@@ -267,7 +269,7 @@
             <configuration>
               <target>
                 <!-- this is necessary for JDepend. It gets confused when there is no target/classes -->
-                <mkdir dir="${project.build.directory}/classes" />
+                <mkdir dir="${project.build.directory}/classes"/>
               </target>
             </configuration>
           </execution>
@@ -281,14 +283,14 @@
               <target description="Checking for cyclic package-dependencies">
                 <xslt in="${project.build.directory}/jdepend-report.xml" out="${project.build.directory}/jdepend-cycle-check.txt">
                   <style>
-                    <javaresource name="jdepend/xsl/jdepend-cycle-check.xsl" />
+                    <javaresource name="jdepend/xsl/jdepend-cycle-check.xsl"/>
                   </style>
                 </xslt>
                 <!-- Fail on cycles -->
-                <loadfile property="fail.message" srcFile="${basedir}/target/jdepend-cycle-check.txt" />
+                <loadfile property="fail.message" srcFile="${basedir}/target/jdepend-cycle-check.txt"/>
                 <fail message="Cycles in package dependencies: ${line.separator} ${fail.message}">
                   <condition>
-                    <isset property="fail.message" />
+                    <isset property="fail.message"/>
                   </condition>
                 </fail>
               </target>
