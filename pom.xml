@@ -30,6 +30,12 @@
     </repository>
   </distributionManagement>
 
+  <scm>
+    <url>https://github.com/openknowledge/openknowledge-dge.git</url>
+    <connection>scm:git:git://github.com/openknowledge/openknowledge-dge.git</connection>
+    <developerConnection>scm:git:git@github.com:openknowledge/openknowledge-dge.git</developerConnection>
+  </scm>
+
   <modules>
     <module>dge-build</module>
     <module>dge-parent</module>
