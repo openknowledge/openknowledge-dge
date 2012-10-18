@@ -21,7 +21,7 @@
   <parent>
     <groupId>de.openknowledge.util</groupId>
     <artifactId>dge-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <relativePath>../dge-parent/pom.xml</relativePath>
   </parent>
 
@@ -29,7 +29,7 @@
   <groupId>de.openknowledge.util</groupId>
   <artifactId>dge-filter</artifactId>
   <name>open knowledge - DataGrid Extensions - Filter</name>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
 
   <build>
     <plugins>
