@@ -6,7 +6,7 @@
     <groupId>de.openknowledge.util</groupId>
     <artifactId>dge-parent</artifactId>
     <relativePath>../dge-parent/pom.xml</relativePath>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
   </parent>
   
   <modelVersion>4.0.0</modelVersion>
@@ -15,7 +15,7 @@
   <artifactId>dge-samples</artifactId>
   <name>open knowledge - DataGrid Extensions - Samples</name>
   <packaging>pom</packaging>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
 
   <url>http://openknowledge.de</url>
   <inceptionYear>2012</inceptionYear>

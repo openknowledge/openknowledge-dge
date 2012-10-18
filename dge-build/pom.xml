@@ -23,7 +23,7 @@
   <artifactId>dge-build</artifactId>
   <name>open knowledge - DataGrid Extensions - Build-Artefacts</name>
   <packaging>jar</packaging>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
 
   <build>
     <plugins>

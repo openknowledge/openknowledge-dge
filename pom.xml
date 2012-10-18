@@ -8,7 +8,7 @@
   <artifactId>openknowledge-dge</artifactId>
   <name>open knowledge - DataGrid Extensions</name>
   <packaging>pom</packaging>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
 
   <url>http://openknowledge.de</url>
   <inceptionYear>2012</inceptionYear>
