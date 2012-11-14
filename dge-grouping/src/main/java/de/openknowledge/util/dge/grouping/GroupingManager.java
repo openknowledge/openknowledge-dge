@@ -121,7 +121,7 @@ public class GroupingManager<E extends Serializable> implements Serializable {
   }
 
   protected Map putOrAddValueLine(Map map, Object key, ValueLine<E> currentLine) {
-    AggregationLine line = map.containsKey(key) ? (AggregationLine) map.get(key) : new AggregationLine(key.toString());
+    AggregationLine line = map.containsKey(key) ? (AggregationLine) map.get(key) : new AggregationLine(key);
     line.setExpanded(expandByDefault);
     line.addValueLine(currentLine, getAggregationValueMethods());
     map.put(key, line);

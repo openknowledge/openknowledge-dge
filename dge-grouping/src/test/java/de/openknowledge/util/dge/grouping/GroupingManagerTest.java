@@ -20,10 +20,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -31,23 +35,23 @@ import static org.junit.Assert.assertThat;
  */
 public class GroupingManagerTest {
 
-  List<Foo> foos;
+  List<PersonTracker> personTrackers;
 
   @Before
-  public void init() {
-    foos = new ArrayList<Foo>();
+  public void init() throws MalformedURLException {
+    personTrackers = new ArrayList<PersonTracker>();
 
-    foos.add(new Foo("Marc", "Today"));
-    foos.add(new Foo("Marc", "Tomorrow"));
-    foos.add(new Foo("Jens", "Today"));
-    foos.add(new Foo("Jens", "Yesterday"));
-    foos.add(new Foo("Bartug", "Yesterday"));
-    foos.add(new Foo("Bartug", "Tomorrow"));
+    personTrackers.add(new PersonTracker("Marc", "Today", new BigDecimal(1), new URL("http://foo.de/")));
+    personTrackers.add(new PersonTracker("Marc", "Tomorrow", new BigDecimal(2), new URL("http://foo.de/")));
+    personTrackers.add(new PersonTracker("Jens", "Today", new BigDecimal(3), new URL("http://bar.de/")));
+    personTrackers.add(new PersonTracker("Jens", "Yesterday", new BigDecimal(4), new URL("http://foo.de/")));
+    personTrackers.add(new PersonTracker("Bartug", "Yesterday", new BigDecimal(5), new URL("http://bar.de/")));
+    personTrackers.add(new PersonTracker("Bartug", "Tomorrow", new BigDecimal(6), new URL("http://foo.de/")));
   }
 
   @Test
   public void groupingMetaDataTest() {
-    GroupingManager<Foo> manager = new GroupingManager<Foo>(foos, Foo.class);
+    GroupingManager<PersonTracker> manager = new GroupingManager<PersonTracker>(personTrackers, PersonTracker.class);
     List<GroupingMetaData> metaData = manager.getGroupingMetaData();
 
     assertThat(metaData.get(0).getOrder(), is(100));
@@ -55,42 +59,83 @@ public class GroupingManagerTest {
   }
 
   @Test
-  public void groupByTest() {
-    GroupingManager<Foo> manager = new GroupingManager<Foo>(foos, Foo.class);
-    manager.groupBy("Bar");
+  public void groupByStringTest() {
+    GroupingManager<PersonTracker> manager = new GroupingManager<PersonTracker>(personTrackers, PersonTracker.class);
+    manager.groupBy("Name");
 
-    assertThat(((AggregationLine<Foo>)manager.getGroupedLines().get(0)).getDisplayName(), is("Bartug"));
-    assertThat(((AggregationLine<Foo>)manager.getGroupedLines().get(1)).getDisplayName(), is("Jens"));
-    assertThat(((AggregationLine<Foo>)manager.getGroupedLines().get(2)).getDisplayName(), is("Marc"));
+    assertThat(((AggregationLine<PersonTracker>)manager.getGroupedLines().get(0)).getDisplayName(), is("Bartug"));
+    assertThat(((AggregationLine<PersonTracker>)manager.getGroupedLines().get(1)).getDisplayName(), is("Jens"));
+    assertThat(((AggregationLine<PersonTracker>)manager.getGroupedLines().get(2)).getDisplayName(), is("Marc"));
+  }
+
+  @Test
+  public void groupByObjectTest() throws MalformedURLException {
+    GroupingManager<PersonTracker> manager = new GroupingManager<PersonTracker>(personTrackers, PersonTracker.class);
+    manager.groupBy("ProfileLink");
+
+    assertEquals(((AggregationLine<PersonTracker>)manager.getGroupedLines().get(0)).getGroupingObject(), new URL("http://bar.de/"));
+    assertEquals(((AggregationLine<PersonTracker>)manager.getGroupedLines().get(1)).getGroupingObject(), new URL("http://foo.de/"));
   }
 
   @Test
   public void initGroupTest() throws Exception {
-    GroupingManager<Foo> manager = new GroupingManager<Foo>(foos, Foo.class);
+    GroupingManager<PersonTracker> manager = new GroupingManager<PersonTracker>(personTrackers, PersonTracker.class);
 
-    assertThat(((ValueLine<Foo>)manager.getGroupedLines().get(0)).getObject().getBar(), is("Marc"));
-    assertThat(((ValueLine<Foo>)manager.getGroupedLines().get(4)).getObject().getBar(), is("Bartug"));
-    assertThat(((ValueLine<Foo>) manager.getGroupedLines().get(5)).getObject().getBar(), is("Bartug"));
+    assertThat(((ValueLine<PersonTracker>)manager.getGroupedLines().get(0)).getObject().getName(), is("Marc"));
+    assertThat(((ValueLine<PersonTracker>)manager.getGroupedLines().get(4)).getObject().getName(), is("Bartug"));
+    assertThat(((ValueLine<PersonTracker>) manager.getGroupedLines().get(5)).getObject().getName(), is("Bartug"));
   }
 
-  public class Foo implements Serializable {
+  @Test
+  public void aggregatedValueTest() {
+    GroupingManager<PersonTracker> manager = new GroupingManager<PersonTracker>(personTrackers, PersonTracker.class);
+    manager.groupBy("Name");
 
-    private String bar;
-    private String yadda;
+    assertEquals(((AggregationLine<PersonTracker>) manager.getGroupedLines().get(0)).getValue("getAge"), new BigDecimal(11));
+    assertEquals(((AggregationLine<PersonTracker>) manager.getGroupedLines().get(1)).getValue("getAge"), new BigDecimal(7));
+    assertEquals(((AggregationLine<PersonTracker>) manager.getGroupedLines().get(2)).getValue("getAge"), new BigDecimal(3));
+  }
 
-    public Foo(String aBar, String aYadda) {
-      bar = aBar;
-      yadda = aYadda;
+  public class PersonTracker implements Serializable {
+
+    private String name;
+    private String lastSeen;
+    private URL url;
+    private BigDecimal age;
+
+    public PersonTracker(String aName, String aLastSeen) {
+      name = aName;
+      lastSeen = aLastSeen;
     }
 
-    @Group(order = 100, displayName = "Bar")
-    public String getBar() {
-      return bar;
+    public PersonTracker(String aName, String aLastSeen, BigDecimal aAge) {
+      this(aName, aLastSeen);
+      age = aAge;
     }
 
-    @Group(order = 200, displayName = "Yadda")
-    public String getYadda() {
-      return yadda;
+    public PersonTracker(String aName, String aLastSeen, BigDecimal aAge, URL aUrl) {
+      this(aName, aLastSeen, aAge);
+      url = aUrl;
+    }
+
+    @Group(order = 100, displayName = "Name")
+    public String getName() {
+      return name;
+    }
+
+    @Group(order = 200, displayName = "LastSeen")
+    public String getLastSeen() {
+      return lastSeen;
+    }
+
+    @Group(order = 200, displayName = "ProfileLink")
+    public URL getUrl() {
+      return url;
+    }
+
+    @AggregrationValue
+    public BigDecimal getAge() {
+      return age;
     }
   }
 }

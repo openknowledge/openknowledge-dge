@@ -24,6 +24,8 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
+ * The annotated method is also allowed to return Object, but should then implement equals correctly.
+ *
  * @author Marc Petersen - open knowledge GmbH
  */
 @Retention(RUNTIME)

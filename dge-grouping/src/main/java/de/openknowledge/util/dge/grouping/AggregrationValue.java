@@ -24,6 +24,9 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
+ * An AggregationValue is used to annotate a method which returns a value for aggregation within a group.
+ * Note: ATM the annotated method should return a BigDecimal.
+ *
  * @author Marc Petersen - open knowledge GmbH
  */
 @Retention(RUNTIME)

@@ -29,18 +29,14 @@ import java.util.Map;
  */
 public final class AggregationLine<E extends Serializable> extends Line {
 
-  private String displayName;
+  private Object groupingObject;
   private List<ValueLine<E>> valueLines;
   private Map<String, BigDecimal> values;
 
-  public AggregationLine(String aDisplayName) {
-    displayName = aDisplayName;
+  public AggregationLine(Object aGroupingObject) {
+    groupingObject = aGroupingObject;
     valueLines = new ArrayList<ValueLine<E>>();
     values = new HashMap<String, BigDecimal>();
-  }
-
-  public String getDisplayName() {
-    return displayName;
   }
 
   public List<ValueLine<E>> getValueLines() {
@@ -66,6 +62,14 @@ public final class AggregationLine<E extends Serializable> extends Line {
 
   public BigDecimal getValue(String key) {
     return values.get(key);
+  }
+
+  public Object getGroupingObject() {
+    return groupingObject;
+  }
+
+  public String getDisplayName() {
+    return getGroupingObject().toString();
   }
 
   @Override
