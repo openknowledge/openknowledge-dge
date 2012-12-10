@@ -16,16 +16,18 @@
 
 package de.openknowledge.util.dge.sample.pet02.domain;
 
-import de.openknowledge.util.dge.filter.annotation.FilterChoiceField;
-import de.openknowledge.util.dge.filter.annotation.FilterField;
-import de.openknowledge.util.dge.grouping.Group;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 import org.joda.time.Years;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
+import de.openknowledge.util.dge.filter.annotation.FilterChoiceField;
+import de.openknowledge.util.dge.filter.annotation.FilterField;
+import de.openknowledge.util.dge.grouping.AggregrationValue;
+import de.openknowledge.util.dge.grouping.Group;
 
 /**
  * @author Marc Petersen - open knowledge GmbH
@@ -46,6 +48,7 @@ public class Pet implements Serializable {
     name = aName;
   }
 
+  @AggregrationValue
   @Group(order = 200, displayName = "Age")
   @FilterField(order = 100, displayName = "Age")
   public BigDecimal getAge() {
