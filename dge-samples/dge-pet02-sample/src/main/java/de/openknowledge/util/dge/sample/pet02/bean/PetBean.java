@@ -16,6 +16,18 @@
 
 package de.openknowledge.util.dge.sample.pet02.bean;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.joda.time.DateMidnight;
+
 import de.openknowledge.util.dge.filter.web.FilterAssembler;
 import de.openknowledge.util.dge.grouping.AggregationLine;
 import de.openknowledge.util.dge.grouping.GroupingManager;
@@ -23,16 +35,6 @@ import de.openknowledge.util.dge.grouping.Line;
 import de.openknowledge.util.dge.sample.pet02.domain.Pet;
 import de.openknowledge.util.dge.sample.pet02.domain.PetLineChoices;
 import de.openknowledge.util.dge.sample.pet02.domain.Species;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.joda.time.DateMidnight;
-
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Marc Petersen - open knowledge GmbH
@@ -49,7 +51,7 @@ public class PetBean implements Serializable {
   private String selectedGroupingMetaData;
 
   protected PetBean() {
-
+    // for CDI only.
   }
 
   public List<Pet> getFilteredPets() {
@@ -127,6 +129,5 @@ public class PetBean implements Serializable {
     }
     return groupingManager;
   }
-
 
 }

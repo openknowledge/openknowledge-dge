@@ -16,10 +16,12 @@
 
 package de.openknowledge.util.dge.sample.pet02.domain;
 
+import java.io.Serializable;
+
 /**
  * @author Marc Petersen - open knowledge GmbH
  */
-public enum Species {
+public enum Species implements Serializable {
 
   CAT("Cat"),
   DOG("Dog"),
