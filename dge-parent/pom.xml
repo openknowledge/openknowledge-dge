@@ -622,7 +622,10 @@
   </pluginRepositories>
 
   <repositories>
-
+    <repository>
+      <id>ok-repo</id>
+      <url>https://repository.openknowledge.de/ok-libs</url>
+    </repository>
     <repository>
       <id>central</id>
       <url>http://repo1.maven.org/maven2</url>
