@@ -38,4 +38,17 @@
     </plugins>
   </build>
 
+  <distributionManagement>
+    <repository>
+      <id>ok-repo</id>
+      <name>ok-repo-releases</name>
+      <url>https://repository.openknowledge.de/ok-libs</url>
+    </repository>
+    <snapshotRepository>
+      <id>ok-repo</id>
+      <name>ok-repo-snapshots</name>
+      <url>https://repository.openknowledge.de/ok-libs</url>
+    </snapshotRepository>
+  </distributionManagement>
+
 </project>
