@@ -40,7 +40,7 @@
     <version.jdepend.maven.plugin>2.0-beta-2</version.jdepend.maven.plugin>
     <version.joda>2.1</version.joda>
     <version.juel>2.2.4</version.juel>
-    <version.junit>4.10</version.junit>
+    <version.junit>4.13.1</version.junit>
     <version.log4j>1.2.17</version.log4j>
     <version.maven.antrun.plugin>1.7</version.maven.antrun.plugin>
     <version.maven.checkstyle.plugin>2.9.1</version.maven.checkstyle.plugin>
